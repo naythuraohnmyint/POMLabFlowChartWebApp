@@ -1,0 +1,140 @@
+﻿body {
+     background-color: honeydew;
+     width:100%;
+     height:100%;
+}
+
+/* scroll fixes */
+.modal-open .modal {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  overflow-y: scroll;
+}
+
+.ex-input-output {
+            width:20px;height: 20px;padding: 0.5em; float: left;margin: 10px; border: 1px; border-color:black;z-index:3;
+        }
+
+.pushmarginform {
+         margin-bottom:20px;
+        }
+
+.draggable
+{   opacity: 0.9;
+    box-shadow: 2px 2px 19px #aaa;
+    -o-box-shadow: 2px 2px 19px #aaa;
+    -webkit-box-shadow: 2px 2px 19px #aaa;
+    -moz-box-shadow: 2px 2px 19px #aaa;
+    background-color:lightcyan;
+    width: 145px;
+    height: 90px; 
+    border: gray 2px solid;
+    border-radius:5px;
+    text-align:center;
+    -webkit-transition: -webkit-box-shadow 0.15s ease-in;
+    -moz-transition: -moz-box-shadow 0.15s ease-in;
+    -o-transition: -o-box-shadow 0.15s ease-in;
+    transition: box-shadow 0.15s ease-in;
+}
+
+.draggable-holder-place {
+    margin-right:-17px;
+    padding-top:10px;
+    padding-left:18px;
+    border: gray 2px groove;
+    background-color: ghostwhite;
+    height: 530px; 
+
+}
+
+#droppable .ui-selecting { 
+    background-color:lightcyan;
+    border: #FECA40 2px solid;
+    border-radius:8px;
+    text-align:center;
+                    }
+#droppable .ui-selected { 
+    background-color:lightcyan;
+    border: #FECA40 2px solid;
+    border-radius:8px;
+    text-align:center;
+                    }
+
+.draggable:hover 
+{ 
+    border:forestgreen 2px solid;
+}
+
+.draggable:active {
+    border: brown 2px solid;
+}
+
+.clickdraggablebox
+{ 
+  border:#FECA40 2px solid;
+
+}
+
+#droppable 
+{ 
+    background-color: ghostwhite;
+    height: 530px; 
+    border: gray 2px groove;
+    border-radius:2px;
+}
+
+#process-box 
+{
+    padding-top:28px;
+    color:black;
+    font-family:'Times New Roman';
+    font-size:large;
+}
+
+.process-box 
+{
+    padding-top:20px;
+    color:black;
+    font-family:'Times New Roman';
+    font-size:1.1em;
+}
+
+
+.active
+{
+    border-color : blue;
+    background : grey;
+}  
+
+.hover 
+{
+    border-color : red;
+    background : green;
+}
+
+.testing {
+
+}
+
+.container {
+  margin-top: 40px;
+  padding-top: 20px;
+  /*background-color: #beb*/
+}
+.vertical {
+  display: inline-block;
+  width: 85px;
+  height: 30px;
+  -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+  transform: rotate(-90deg);
+}
+.vertical {
+  box-shadow: inset 0px 4px 6px #ccc;
+}
+.progress-bar {
+  box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
+}
+
+.text_input_percentage .output_percentage_progress {
+    color:white;
+}

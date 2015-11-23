@@ -66,7 +66,66 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="libs\angular-libs\angular-animate.js" />
+    <Content Include="libs\angular-libs\angular.js" />
+    <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.css" />
+    <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.min.css" />
+    <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap.css" />
+    <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap.min.css" />
+    <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="libs\bootstrap-3.3.5-libs\js\bootstrap.js" />
+    <Content Include="libs\bootstrap-3.3.5-libs\js\bootstrap.min.js" />
+    <Content Include="libs\bootstrap-3.3.5-libs\js\npm.js" />
+    <Content Include="libs\jquery-libs\jquery-2.1.4.js" />
+    <Content Include="libs\jquery-libs\jquery-ui.css" />
+    <Content Include="libs\jquery-libs\jquery-ui.js" />
+    <Content Include="libs\jquery-libs\jquery.plugin.html2canvas.js" />
+    <Content Include="libs\jquery-libs\jquery.ui.multiprogressbar.css" />
+    <Content Include="libs\jquery-libs\jquery.ui.multiprogressbar.js" />
+    <Content Include="libs\jsPlumb-libs\css\jsPlumbToolkit-defaults.css" />
+    <Content Include="libs\jsPlumb-libs\css\jsPlumbToolkit-demo.css" />
+    <Content Include="libs\jsPlumb-libs\css\main.css" />
+    <Content Include="libs\jsPlumb-libs\demo\demo-list.js" />
+    <Content Include="libs\jsPlumb-libs\demo\demo.css" />
+    <Content Include="libs\jsPlumb-libs\demo\demo.js" />
+    <Content Include="libs\jsPlumb-libs\js\anchors.js" />
+    <Content Include="libs\jsPlumb-libs\js\base-library-adapter.js" />
+    <Content Include="libs\jsPlumb-libs\js\browser-util.js" />
+    <Content Include="libs\jsPlumb-libs\js\connection.js" />
+    <Content Include="libs\jsPlumb-libs\js\connectors-bezier.js" />
+    <Content Include="libs\jsPlumb-libs\js\connectors-flowchart.js" />
+    <Content Include="libs\jsPlumb-libs\js\connectors-statemachine.js" />
+    <Content Include="libs\jsPlumb-libs\js\defaults.js" />
+    <Content Include="libs\jsPlumb-libs\js\dom-adapter.js" />
+    <Content Include="libs\jsPlumb-libs\js\dom.jsPlumb.js" />
+    <Content Include="libs\jsPlumb-libs\js\endpoint.js" />
+    <Content Include="libs\jsPlumb-libs\js\jsPlumb.js" />
+    <Content Include="libs\jsPlumb-libs\js\overlay-component.js" />
+    <Content Include="libs\jsPlumb-libs\js\renderers-svg.js" />
+    <Content Include="libs\jsPlumb-libs\js\util.js" />
+    <Content Include="libs\jsPlumb-libs\lib\biltong-0.2.js" />
+    <Content Include="libs\jsPlumb-libs\lib\jsBezier-0.7.js" />
+    <Content Include="libs\jsPlumb-libs\lib\katavorio-0.13.0.js" />
+    <Content Include="libs\jsPlumb-libs\lib\mottle-0.7.1.js" />
+    <Content Include="libs\modal-libs\jquery.cookie-1.3.1.js" />
+    <Content Include="libs\modal-libs\jquery.steps.css" />
+    <Content Include="libs\modal-libs\jquery.steps.js" />
+    <Content Include="libs\modal-libs\jquery.steps.min.js" />
+    <Content Include="libs\modal-libs\modaljs.js" />
+    <Content Include="libs\modal-libs\modernizr-2.6.2.min.js" />
+    <Content Include="libs\other-libs\formValidation.min.js" />
+    <Content Include="libs\other-libs\html2canvas.js" />
+    <Content Include="libs\other-libs\placeholder.min.js" />
+    <Content Include="libs\self-css\index.js" />
+    <Content Include="libs\self-js\style.css" />
     <Content Include="packages.config" />
+    <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.css.map" />
+    <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap.css.map" />
+    <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -80,6 +139,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
