@@ -66,8 +66,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\attention-to-detail-icon.png" />
+    <Content Include="images\mct_logo.png" />
+    <Content Include="images\simtech-col-transperent.png" />
+    <Content Include="images\simtech-col.jpg" />
     <Content Include="index.html" />
-    <Content Include="libs\angular-libs\angular-animate.js" />
     <Content Include="libs\angular-libs\angular.js" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.css" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.min.css" />
@@ -86,7 +89,6 @@
     <Content Include="libs\jsPlumb-libs\css\jsPlumbToolkit-defaults.css" />
     <Content Include="libs\jsPlumb-libs\css\jsPlumbToolkit-demo.css" />
     <Content Include="libs\jsPlumb-libs\css\main.css" />
-    <Content Include="libs\jsPlumb-libs\demo\demo-list.js" />
     <Content Include="libs\jsPlumb-libs\demo\demo.css" />
     <Content Include="libs\jsPlumb-libs\demo\demo.js" />
     <Content Include="libs\jsPlumb-libs\js\anchors.js" />
@@ -117,8 +119,8 @@
     <Content Include="libs\other-libs\formValidation.min.js" />
     <Content Include="libs\other-libs\html2canvas.js" />
     <Content Include="libs\other-libs\placeholder.min.js" />
-    <Content Include="libs\self-css\index.js" />
-    <Content Include="libs\self-js\style.css" />
+    <Content Include="libs\self-js\index.js" />
+    <Content Include="libs\self-css\style.css" />
     <Content Include="packages.config" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.css.map" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap.css.map" />
@@ -126,6 +128,8 @@
     <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\MarcellusSC-Regular.ttf" />
+    <Content Include="fonts\SFDigitalReadout-Heavy.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -134,6 +138,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="view\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

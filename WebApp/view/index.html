@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html>
+<meta charset='utf-8'>
+<title>Energy Managment System</title>
+<link rel="shortcut icon" href="../images/mct_logo.png" type="image/png">
+
+<!-- JQuery JS -->
+<script src="../libs/jquery-libs/jquery-2.1.4.js"></script>
+<script src="../libs/jquery-libs/jquery-ui.js"></script>
+<script src="../libs/jquery-libs/jquery.plugin.html2canvas.js"></script>
+
+<!--JQuery CSS -->
+<link href="../libs/jquery-libs/jquery-ui.css" rel="stylesheet" />
+
+<!-- Embembed Tab JS -->
+<script src="../libs/modal-libs/jquery.steps.js"></script>
+<script src="../libs/modal-libs/jquery.cookie-1.3.1.js"></script>
+<script src="../libs/modal-libs/modernizr-2.6.2.min.js"></script>
+<script src="../libs/modal-libs/modaljs.js"></script>
+
+<!-- Embembed Tab JS -->
+<link href="../libs/modal-libs/jquery.steps.css" rel="stylesheet" />
+
+<!-- Angular JS -->
+<script src="../libs/angular-libs/angular.js"></script>
+<!-- Animate MISS -->
+
+<!-- Boostrap JS -->
+<script src="../libs/bootstrap-3.3.5-libs/js/bootstrap.js"></script>
+
+<!-- Boostrap CSS -->
+<link href="../libs/bootstrap-3.3.5-libs/css/bootstrap.css" rel="stylesheet" />
+
+<!--Other JS -->
+<script src="../libs/other-libs/placeholder.min.js"></script>
+<script src="../libs/other-libs/html2canvas.js"></script>
+
+
+<!-- Self JS AND CSS -->
+<script src="../libs/self-js/index.js"></script>
+<link href="../libs/self-css/style.css" rel="stylesheet" />
+
+<!-- Plumb Lib -->
+<script src="../libs/jsPlumb-libs/lib/biltong-0.2.js"></script>
+<script src="../libs/jsPlumb-libs/lib/jsBezier-0.7.js"></script>
+<script src="../libs/jsPlumb-libs/lib/katavorio-0.13.0.js"></script>
+<script src="../libs/jsPlumb-libs/lib/mottle-0.7.1.js"></script>
+
+
+<!-- Plumb SRC -->
+<script src="../libs/jsPlumb-libs/js/util.js"></script>
+<script src="../libs/jsPlumb-libs/js/browser-util.js"></script>
+<script src="../libs/jsPlumb-libs/js/jsPlumb.js"></script>
+<script src="../libs/jsPlumb-libs/js/dom-adapter.js"></script>
+<script src="../libs/jsPlumb-libs/js/overlay-component.js"></script>
+<script src="../libs/jsPlumb-libs/js/endpoint.js"></script>
+<script src="../libs/jsPlumb-libs/js/connection.js"></script>
+<script src="../libs/jsPlumb-libs/js/anchors.js"></script>
+<script src="../libs/jsPlumb-libs/js/defaults.js"></script>
+<script src="../libs/jsPlumb-libs/js/connectors-bezier.js"></script>
+<script src="../libs/jsPlumb-libs/js/connectors-statemachine.js"></script>
+<script src="../libs/jsPlumb-libs/js/connectors-flowchart.js"></script>
+<script src="../libs/jsPlumb-libs/js/renderers-svg.js"></script>
+<script src="../libs/jsPlumb-libs/js/base-library-adapter.js"></script>
+<script src="../libs/jsPlumb-libs/js/dom.jsPlumb.js"></script>
+
+
+<!-- Plumb Custom -->
+<link href="../libs/jsPlumb-libs/css/jsPlumbToolkit-defaults.css" rel="stylesheet" />
+<link href="../libs/jsPlumb-libs/css/jsPlumbToolkit-demo.css" rel="stylesheet" />
+<link href="../libs/jsPlumb-libs/css/main.css" rel="stylesheet" />
+<link href="../libs/jsPlumb-libs/demo/demo.css" rel="stylesheet" />
+
+<!-- Plumb Demo -->
+<script src="../libs/jsPlumb-libs/demo/demo.js"></script>
+
+<br style="clear:both">
+
+<center>
+    <div class="row">
+        <div class="md-col-4"></div>
+        <div class="md-col-4" style="font-family:Papyrus;font-size:large"><h2>Energy and Material Flows Modeling</h2></div>
+        <div class="md-col-4"></div>
+    </div>
+</center>
+
+<div class="row">
+    <div class="col-xs-9"></div>
+    <div class="col-xs-2 pushmarginform" style="border:2px; border-color:darkblue; border-radius:5px; border-style:dotted;" >
+        <div class="ex-input-output" style="background-color:#5BC0DE;"></div><div style="margin-top: 8px;"><font face="Tahoma"><i>Input</i>&nbsp; <b>%</b></font></div>
+        <br/>
+        <div class="ex-input-output" style="background-color:#5CB85C;"></div><div style="margin-top: 8px;"><font face="Tahoma"><i>Output</i>&nbsp; <b>%</b></font></div>
+    </div>
+    <div class="col-xs-1"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3 draggable-holder-place">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="draggable" id="flowchartWindow">
+                    <p id="process-box">Process</p>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+    </div>
+    <div class="col-md-7">
+        <div id="droppable">
+        </div>
+    </div>
+    <div class="col-md-1" style="border:1px;"></div>
+</div>
+
+<div class="row" style="margin-top:10px;">
+    <center><div class="col-xs-12"><button type="button" class="btn btn-info btn-lg" id="btnSaveDownload">Download As Image</button>&nbsp;<button type="button" class="btn btn-info btn-lg" id="btnReset">Reset</button>
+                &nbsp;<button type="button" class="btn btn-info btn-lg" id="btnOpenModal">Open</button></div></center>
+</div>
+
+<!-- Modal -->
+<div class="modal modal-vcenter fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Process Information Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-8"><p style="text-align:center" id="id_process"></p></div>
+                    <div class="col-xs-3 pushmarginform" style="border:2px; border-color:darkblue; border-radius:5px; border-style:dotted;">
+                        <div class="ex-input-output" style="background-color:#5BC0DE;"></div><div style="margin-top: 8px;"><font face="Tahoma"><i>Input</i>&nbsp; <b>%</b></font></div>
+                        <br />
+                        <div class="ex-input-output" style="background-color:#5CB85C;"></div><div style="margin-top: 8px;"><font face="Tahoma"><i>Output</i>&nbsp; <b>%</b></font></div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+
+                <br /><br />
+                <div class="row pushmarginform">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-5">
+                        <label id="stylecool">Display Process Name:</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <input type="text" name="process" class="form-control" id="process-name" />
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+
+                <div class="row pushmarginform">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-5">
+                        <label id="stylecool">Enter Input Percentage:</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <input type="text" name="process" class="form-control" id="process-input-percentage" />
+                    </div>
+                    <div class="col-xs-1"></div>
+
+                </div>
+
+                <div class="row pushmarginform">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-5">
+                        <label id="stylecool">Enter Output Percentage:</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <input type="text" name="process" class="form-control" id="process-output-percentage" />
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="col-md-5">
+                    <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Add</a>
+                    <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Edit</a>
+                    <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Delete</a>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-4">
+                    <button class="btn btn-info" data-dismiss="modal" id="btnSave">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Second Modal -->
+<div class="modal modal-vcenter fade" id="myModal3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Material Input</h4>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4"><label id="stylecool">Material Name: </label><input type="text" class="form-control" /></div>
+                    <div class="col-md-4"><label id="stylecool">Quantity: </label><input type="text" class="form-control" /></div>
+                    <div class="col-md-4"><label id="stylecool">Unit: </label><input type="text" class="form-control" /></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6"><label id="stylecool">Carbon Storage: </label><input type="text" class="form-control" /></div>
+                    <div class="col-md-6"><label id="stylecool">Activity Data Origin: </label><input type="text" class="form-control" /></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6"><label id="stylecool">Emissions Factor: </label><input type="text" class="form-control" /></div>
+                    <div class="col-md-6"><label id="stylecool">Emissions Factor Source: </label><input type="text" class="form-control" /></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12"><label id="stylecool">Remarks: </label><input type="text" class="form-control" /></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" data-dismiss="modal" class="btn btn-primary">Save changes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Thrid Modal  --> 
+<div class="modal modal-vcenter fade" id="myModal4">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Process Setting</h4>
+
+            </div>
+            <div class="container"></div>
+            <div class="modal-body">
+                    
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="example-embed">
+                            <h3>Identify Process</h3>
+                            <section>
+                                
+                                <div class="row">
+                                    <div class="col-md-12">Process Name: </div>
+                                </div>
+                                <div class="row pushmarginform">
+                                    <div class="col-md-12"><input type="text" class="form-control" id="real-process-name" placeholder="Enter Process Name"/></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">Display Name: </div>
+                                </div>
+                                <div class="row pushmarginform">
+                                    <div class="col-md-12"><input type="text" class="form-control" id="display-process-name" placeholder="Enter Display Name"/></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9"></div>
+                                    <div class="col-md-3"><button class="btn btn-primary" id="btnAddProcessType">Add Process Type</button></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">Type of Process Involved: </div>
+                                </div>
+                                
+
+                                <div class="form-group row pushmarginform">
+                                    <div class="col-md-11"><input type="text" class="form-control" placeholder="Enter Process" name="typeofprocess[0].name" /></div><div class="col-md-1"></div>
+                                </div>
+
+                                <div class="form-group row pushmarginform hide" id="template-process-type">
+                                    <div class="col-md-11"><input type="text" name="typeofprocess" class="form-control" placeholder="Enter Process"/></div><div class="col-md-1">
+                                        <button class="btn btn-warning btnRemoveProcessType">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                               
+                                <div class="row">
+                                    <div class="col-md-12">Process Description: </div>
+                                </div>
+                                <div class="row pushmarginform">
+                                    <div class="col-md-12"><textarea class="form-control" placeholder="Enter Process Description" id="process-description"></textarea></div>
+                                </div>
+                                 
+                            </section>
+                            <h3>Define process parameter</h3>
+                            <section>
+                               <p>Coming Soon</p>
+                            </section>
+                            <h3>Determine material input/output</h3>
+                            <section>
+                               
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2"><button class="btn btn-primary" id="btnAddMInput">Add material</button></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">Material Input: </div>
+                                    <div class="col-md-8"></div>
+                                </div>
+                                
+
+                                    <div class="form-group row pushmarginform">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mInput[0].name" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mInput[0].qty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mInput[0].unit" /></div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+
+                                    <div class="form-group row pushmarginform hide" id="template-material-input">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mInputName" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mInputQty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mInputUnit" /></div>
+                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialInput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                    </div>
+
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2"><button class="btn btn-primary" id="btnAddMOutput">Add material</button></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">Material Output: </div>
+                                    <div class="col-md-8"></div>
+                                </div>
+
+                                    <div class="form-group row pushmarginform">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutput[0].name"/></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutput[0].qty"/></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutput[0].unit"/></div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+
+                                    <div class="form-group row pushmarginform hide" id="template-material-output">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutputName"/></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutputQty"/></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutputUnit"/></div>
+                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialOutput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                    </div>
+
+                            </section>
+                            <h3>Determine energy input</h3>
+                            <section>
+
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2"><button class="btn btn-primary" id="btnAddEInput">Add material</button></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">Energy Input: </div>
+                                    <div class="col-md-8"></div>
+                                </div>
+                               
+                                    <div class="form-group row pushmarginform">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInput[0].name" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInput[0].qty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInput[0].unit" /></div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+
+                                    <div class="form-group row pushmarginform hide" id="template-energy-input">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInputName" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInputQty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInputUnit" /></div>
+                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveEnergyInput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                    </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" data-dismiss="modal" class="btn btn-primary">Save changes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    
+    <div class="row">
+
+    <div class="col-xs-12">
+
+        <div id="example-embed">
+            <h3>Iframe Step</h3>
+            <section data-mode="iframe">hi</section>
+            <h3>Second Step</h3>
+            <section>
+                <p>
+                    Donec mi sapien, hendrerit nec egestas a, rutrum vitae dolor. Nullam venenatis diam ac ligula elementum pellentesque.
+                    In lobortis sollicitudin felis non eleifend. Morbi tristique tellus est, sed tempor elit. Morbi varius, nulla quis condimentum
+                    dictum, nisi elit condimentum magna, nec venenatis urna quam in nisi. Integer hendrerit sapien a diam adipiscing consectetur.
+                    In euismod augue ullamcorper leo dignissim quis elementum arcu porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Vestibulum leo velit, blandit ac tempor nec, ultrices id diam. Donec metus lacus, rhoncus sagittis iaculis nec, malesuada a diam.
+                    Donec non pulvinar urna. Aliquam id velit lacus.
+                </p>
+            </section>
+            <h3>Third Step</h3>
+            <section>
+                <p>
+                    Morbi ornare tellus at elit ultrices id dignissim lorem elementum. Sed eget nisl at justo condimentum dapibus. Fusce eros justo,
+                    pellentesque non euismod ac, rutrum sed quam. Ut non mi tortor. Vestibulum eleifend varius ullamcorper. Aliquam erat volutpat.
+                    Donec diam massa, porta vel dictum sit amet, iaculis ac massa. Sed elementum dui commodo lectus sollicitudin in auctor mauris
+                    venenatis.
+                </p>
+            </section>
+            <h3>Fourth Step</h3>
+            <section>
+                <p>
+                    Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor.
+                    Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae.
+                    Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut commodo tortor.
+                </p>
+            </section>
+        </div>
+
+    </div>
+
+</div>
+
+
+-->
