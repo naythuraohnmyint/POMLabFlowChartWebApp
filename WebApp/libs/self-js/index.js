@@ -527,7 +527,7 @@
                 process_id_arr.push("flowchartWindow" + count);
                 newbox = ui.helper.clone();
 
-                var n = newbox.appendTo($(this)).attr('id', process_id_arr[count - 1]).addClass('process-box');
+                var n = newbox.appendTo($(this)).attr('id', process_id_arr[count - 1]).addClass('process-box').addClass('dashed-progress');
 
 
                 /* Plumb */

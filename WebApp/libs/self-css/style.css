@@ -138,3 +138,9 @@
 .text_input_percentage .output_percentage_progress {
     color:white;
 }
+
+.dashed-progress {
+     border-style: dashed;
+     border-color: brown; 
+    /* border-style: dotted; */
+}
