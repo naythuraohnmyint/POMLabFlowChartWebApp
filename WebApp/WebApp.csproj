@@ -83,6 +83,7 @@
     <Content Include="libs\jquery-libs\jquery-2.1.4.js" />
     <Content Include="libs\jquery-libs\jquery-ui.css" />
     <Content Include="libs\jquery-libs\jquery-ui.js" />
+    <Content Include="libs\jquery-libs\jquery.outerhtml.js" />
     <Content Include="libs\jquery-libs\jquery.plugin.html2canvas.js" />
     <Content Include="libs\jquery-libs\jquery.ui.multiprogressbar.css" />
     <Content Include="libs\jquery-libs\jquery.ui.multiprogressbar.js" />

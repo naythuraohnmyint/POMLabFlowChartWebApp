@@ -112,8 +112,11 @@
     background : green;
 }
 
-.testing {
+.leftcontainer {
 
+}
+
+.rightcontainer {
 }
 
 .container {
@@ -123,8 +126,8 @@
 }
 .vertical {
   display: inline-block;
-  width: 85px;
-  height: 30px;
+  width: 86px;
+  height: 31px;
   -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
   transform: rotate(-90deg);
 }

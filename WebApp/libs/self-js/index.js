@@ -393,20 +393,105 @@
             }
            // alert("Total: " + mInputTotal +" , "+mOutputTotal+" , "+eInputTotal);
 
-            inputTotal = mInputTotal + eInputTotal;
+           // inputTotal = mInputTotal + eInputTotal;
+            
 
-                   
-                    //alert(mInputTotal);
-                    
-            $("#" + currentIDparam).find(".leftcontainer").find(".progress-bar").css('width', inputTotal + "%");
-            $("#" + currentIDparam).find(".leftcontainer").find(".text_input_percentage").html(inputTotal + "%");
 
-            $("#" + currentIDparam).find(".midcontainer").find(".text_process_name").html(display_process_name);
+            var spancol_input = $('<span style="margin-left:-43px; margin-top:-14px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
+            var spancontainer_input = $('<span />').attr({ 'class': 'container' });
+            var spanprogressvertical_input = $('<span />').attr({ 'class': 'progress vertical leftcontainer' });
+            var progressinfo_input = "";
 
-            $("#" + currentIDparam).find(".rightcontainer").find(".progress-bar").css('width', mOutputTotal + "%");
-            $("#" + currentIDparam).find(".rightcontainer").find(".text_output_percentage").html(mOutputTotal + "%");
-                    
+            for (var i = 0; i < mInput_arr.length; i++) {
+             
+             if (mInput_arr.length == 1)
+             {
+                 progressinfo_input += '<span class="progress-bar progress-bar-info" style="width:100%" title="'+mInput_arr[i].name +' : '+mInput_arr[i].qty+' '+mInput_arr[i].unit+'"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
+                 break;
+             }
+             else if (mInput_arr.length == 2)
+             {
+                 var fNum = parseFloat(mInput_arr[i].qty);
+                 var sNum = parseFloat(mInput_arr[i + 1].qty);
+                 if (fNum === sNum) {
+                     progressinfo_input += '<span class="progress-bar progress-bar-success" style="width:50%" title="' + mInput_arr[i].name + ' : ' + mInput_arr[i].qty + ' ' + mInput_arr[i].unit + '"><span class="text_input_percentage" style="color:black; font-weight:bold">50%</span></span><span class="progress-bar progress-bar-info" style="width:50%" title="' + mInput_arr[i+1].name + ' : ' + mInput_arr[i+1].qty + ' ' + mInput_arr[i+1].unit + '"><span class="text_input_percentage" style="color:black; font-weight:bold">50%</span></span>';
+                     break;
+                 }
+                 else {
+                     if (fNum > sNum) {
+                         var resDiv = fNum / sNum;
+                         var resDivAdd = resDiv + 1;
+                         var resPortion = 100 / resDivAdd;
+                         var largePortion = Math.round(resDiv * resPortion);
+                         var smallPortion = 100 - largePortion;
+                         progressinfo_input += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
+                         break;
+                     }
+                     else {
+                         var resDiv = sNum / fNum;
+                         var resDivAdd = resDiv + 1;
+                         var resPortion = 100 / resDivAdd;
+                         var largePortion = Math.round(resDiv*resPortion);
+                         var smallPortion = 100 - largePortion;
+                         progressinfo_input += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
+                         break;
+                     }
+                 }
+             }
 
+         }
+
+        var spanprogressbarinfo_input = $(progressinfo_input);
+        $("#" + currentIDparam).html(spancol_input.html(spancontainer_input.html(spanprogressvertical_input.html(spanprogressbarinfo_input))));
+
+        var divprocessName = $('<div style="margin-left:20px;" />').attr({ 'class': 'col-md-8' });
+        var ptag_processName = $('<p class="text_process_name"/>').text(display_process_name);
+        $("#" + currentIDparam).append(divprocessName.append(ptag_processName));
+
+        var spancol_output = $('<span style="margin-left:-46px; margin-top:-14px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
+        var spancontainer_output = $('<span />').attr({ 'class': 'container' });
+        var spanprogressvertical_output = $('<span />').attr({ 'class': 'progress vertical rightcontainer' });
+        var progressinfo_output = "";
+
+        for (var i = 0; i < mOutput_arr.length; i++) {
+
+            if (mOutput_arr.length == 1) {
+                progressinfo_output += '<span class="progress-bar progress-bar-info" style="width:100%" title="' + mOutput_arr[i].name + ' : ' + mOutput_arr[i].qty + ' ' + mOutput_arr[i].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold">100%</span></span>';
+                break;
+            }
+            else if (mOutput_arr.length == 2) {
+                var fNum = parseFloat(mOutput_arr[i].qty);
+                var sNum = parseFloat(mOutput_arr[i + 1].qty);
+                if (fNum === sNum) {
+                    progressinfo_output += '<span class="progress-bar progress-bar-success" style="width:50%" title="' + mOutput_arr[i].name + ' : ' + mOutput_arr[i].qty + ' ' + mOutput_arr[i].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold" title="' + mOutput_arr[i+1].name + ' : ' + mOutput_arr[i+1].qty + ' ' + mOutput_arr[i+1].unit + '">50%</span></span><span class="progress-bar progress-bar-info" style="width:50%"><span class="text_output_percentage" style="color:black; font-weight:bold">50%</span></span>';
+                    break;
+                }
+                else {
+                    if (fNum > sNum) {
+                        var resDiv = fNum / sNum;
+                        var resDivAdd = resDiv + 1;
+                        var resPortion = 100 / resDivAdd;
+                        var largePortion = Math.round(resDiv * resPortion);
+                        var smallPortion = 100 - largePortion;
+                        progressinfo_output += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
+                        break;
+                    }
+                    else {
+                        var resDiv = sNum / fNum;
+                        var resDivAdd = resDiv + 1;
+                        var resPortion = 100 / resDivAdd;
+                        var largePortion = Math.round(resDiv * resPortion);
+                        var smallPortion = 100 - largePortion;
+                        progressinfo_output += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        var spanprogressbarinfo_output = $(progressinfo_output);
+        $("#" + currentIDparam).append(spancol_output.html(spancontainer_output.html(spanprogressvertical_output.html(spanprogressbarinfo_output))));
 
             if (window.debug)
             {
@@ -682,8 +767,7 @@
 
                 });
                 /* Plumb */
-
-                //var spancol_input = $('<span style="margin-left:-40px; margin-top:-53px;"/>').attr({ 'class': 'col-md-2' });
+                /*
                 var spancol_input = $('<span style="margin-left:-43px; margin-top:-12px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
                 var spancontainer_input = $('<span />').attr({ 'class': 'container' });
                 var spanprogressvertical_input = $('<span />').attr({ 'class': 'progress vertical leftcontainer' });
@@ -697,11 +781,10 @@
                 var imgview_id = $.trim(process_id_arr[count - 1] + "_view");
                 var imagetag_process = $('<img width="15px" src="../images/attention-to-detail-icon.png" style="margin-top:-20px;"/>').attr("id",imgview_id);
 
-                $("#" + process_id_arr[count - 1]).append(divprocessName.append(ptag_processName).append(imagetag_process));
+              // $("#" + process_id_arr[count - 1]).append(divprocessName.append(ptag_processName).append(imagetag_process));
 
-                // $("#" + process_id_arr[count - 1]).append(divprocessName.append(ptag_processName));
+                 $("#" + process_id_arr[count - 1]).append(divprocessName.append(ptag_processName));
 
-                //var spancol_output = $('<span style="margin-left:-43px; margin-top:-53px;"/>').attr({ 'class': 'col-md-2' });
                 var spancol_output = $('<span style="margin-left:-45px; margin-top:-12px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
                 var spancontainer_output = $('<span />').attr({ 'class': 'container' });
                 var spanprogressvertical_output = $('<span />').attr({ 'class': 'progress vertical rightcontainer' });
@@ -709,6 +792,7 @@
                 var spanpercentage_output = $('<span class="text_output_percentage" style="color:black; font-weight:bold"/>').html("0%");
 
                 $("#" + process_id_arr[count - 1]).append(spancol_output.html(spancontainer_output.html(spanprogressvertical_output.html(spanprogressbarinfo_output.html(spanpercentage_output)))));
+            */
             }
             
             for (var i = 0; i < process_id_arr.length; i++) {
@@ -718,9 +802,9 @@
                         cursor: 'move'
                     });
 
-                $("#" + $.trim(process_id_arr[i] + "_view")).click(function (event) {
-                    alert(event.target.id);
-                });
+                //$("#" + $.trim(process_id_arr[i] + "_view")).click(function (event) {
+                //    alert(event.target.id);
+                //});
             }
 
 
@@ -728,159 +812,5 @@
     });
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-    
-    /* Plumb */
-    /*
-    jsPlumb.ready(function () {
-
-        var instance = window.jsp = jsPlumb.getInstance({
-            // default drag options
-            DragOptions: { cursor: 'pointer', zIndex: 2000 },
-            // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
-            // case it returns the 'labelText' member that we set on each connection in the 'init' method below.
-            ConnectionOverlays: [
-                ["Arrow", { location: 1 }],
-                ["Label", {
-                    location: 0.1,
-                    id: "label",
-                    cssClass: "aLabel"
-                }]
-            ],
-            Container: "canvas"
-        });
-
-        var basicType = {
-            connector: "StateMachine",
-            paintStyle: { strokeStyle: "red", lineWidth: 4 },
-            hoverPaintStyle: { strokeStyle: "blue" },
-            overlays: [
-                "Arrow"
-            ]
-        };
-        instance.registerConnectionType("basic", basicType);
-
-        // this is the paint style for the connecting lines..
-        var connectorPaintStyle = {
-            lineWidth: 4,
-            strokeStyle: "#61B7CF",
-            joinstyle: "round",
-            outlineColor: "white",
-            outlineWidth: 2
-        },
-        // .. and this is the hover style.
-            connectorHoverStyle = {
-                lineWidth: 4,
-                strokeStyle: "#216477",
-                outlineWidth: 2,
-                outlineColor: "white"
-            },
-            endpointHoverStyle = {
-                fillStyle: "#216477",
-                strokeStyle: "#216477"
-            },
-        // the definition of source endpoints (the small blue ones)
-            sourceEndpoint = {
-                endpoint: "Dot",
-                paintStyle: {
-                    strokeStyle: "#7AB02C",
-                    fillStyle: "transparent",
-                    radius: 7,
-                    lineWidth: 3
-                },
-                isSource: true,
-                connector: ["Flowchart", { stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true }],
-                connectorStyle: connectorPaintStyle,
-                hoverPaintStyle: endpointHoverStyle,
-                connectorHoverStyle: connectorHoverStyle,
-                dragOptions: {},
-                overlays: [
-                    ["Label", {
-                        location: [0.5, 1.5],
-                        cssClass: "endpointSourceLabel"
-                    }]
-                ]
-            },
-        // the definition of target endpoints (will appear when the user drags a connection)
-            targetEndpoint = {
-                endpoint: "Dot",
-                paintStyle: { fillStyle: "#7AB02C", radius: 11 },
-                hoverPaintStyle: endpointHoverStyle,
-                maxConnections: -1,
-                dropOptions: { hoverClass: "hover", activeClass: "active" },
-                isTarget: true,
-                overlays: [
-                    ["Label", { location: [0.5, -0.5], cssClass: "endpointTargetLabel" }]
-                ]
-            },
-            init = function (connection) {
-                connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
-            };
-
-        var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
-            for (var i = 0; i < sourceAnchors.length; i++) {
-                var sourceUUID = toId + sourceAnchors[i];
-                instance.addEndpoint("flowchart" + toId, sourceEndpoint, {
-                    anchor: sourceAnchors[i], uuid: sourceUUID
-                });
-            }
-            for (var j = 0; j < targetAnchors.length; j++) {
-                var targetUUID = toId + targetAnchors[j];
-                instance.addEndpoint("flowchart" + toId, targetEndpoint, { anchor: targetAnchors[j], uuid: targetUUID });
-            }
-        };
-
-        instance.batch(function () {
-
-            
-            _addEndpoints("Window4", ["TopCenter", "BottomCenter"], ["LeftMiddle", "RightMiddle"]);
-            _addEndpoints("Window2", ["LeftMiddle", "BottomCenter"], ["TopCenter", "RightMiddle"]);
-            _addEndpoints("Window3", ["RightMiddle", "BottomCenter"], ["LeftMiddle", "TopCenter"]);
-            _addEndpoints("Window1", ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
-            _addEndpoints("Window5", ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
-            _addEndpoints("Window6", ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
-            
-
-
-            instance.bind("connection", function (connInfo, originalEvent) {
-                init(connInfo.connection);
-            });
-
-            instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), { grid: [20, 20] });
-            
-            
-            instance.connect({ uuids: ["Window2TopCenter", "Window3TopCenter"], editable: true });
-            instance.connect({ uuids: ["Window2LeftMiddle", "Window4LeftMiddle"], editable: true });
-            instance.connect({ uuids: ["Window4TopCenter", "Window4RightMiddle"], editable: true });
-            instance.connect({ uuids: ["Window3RightMiddle", "Window2RightMiddle"], editable: true });
-            instance.connect({ uuids: ["Window4BottomCenter", "Window1TopCenter"], editable: true });
-            instance.connect({ uuids: ["Window3BottomCenter", "Window1BottomCenter"], editable: true });
-            instance.connect({ uuids: ["Window5BottomCenter", "Window6BottomCenter"], editable: true });
-            
-            
-            instance.bind("click", function (conn, originalEvent) {
-                conn.toggleType("basic");
-            });
-
-            instance.bind("connectionDrag", function (connection) {
-                console.log("connection " + connection.id + " is being dragged. suspendedElement is ", connection.suspendedElement, " of type ", connection.suspendedElementType);
-            });
-
-            instance.bind("connectionDragStop", function (connection) {
-                console.log("connection " + connection.id + " was dragged");
-            });
-
-            instance.bind("connectionMoved", function (params) {
-                console.log("connection " + params.connection.id + " was moved");
-            });
-        });
-
-        jsPlumb.fire("jsPlumbDemoLoaded", instance);
-
-
-    });
-    */
-
-   
 
 });
