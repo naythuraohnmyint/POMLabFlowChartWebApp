@@ -142,8 +142,14 @@
     color:white;
 }
 
+
 .dashed-progress {
      border-style: dashed;
      border-color: brown; 
+    /* border-style: dotted; */
+}
+
+.complete-progress {
+     border: green 2px solid;
     /* border-style: dotted; */
 }

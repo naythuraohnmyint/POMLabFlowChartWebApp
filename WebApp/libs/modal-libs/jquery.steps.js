@@ -1929,8 +1929,9 @@ var defaults = $.fn.steps.defaults = {
     onFinishing: function (event, currentIndex) {
 
         // Self-Define TAG
-
-        saveProcess(getcurrentID());
+        alert("1Current ID: " + window.getcurrentID());
+        saveProcess(window.getcurrentID());
+        $('#myModal4').modal('hide');
         return true;
     },
 

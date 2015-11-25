@@ -83,7 +83,7 @@
     <div class="row">
         <div class="md-col-4"></div>
         <div class="md-col-4" style="font-family:Papyrus;font-size:large"><h2>Energy and Material Flows Modeling</h2></div>
-        <div class="md-col-4"></div></div>
+        <div class="md-col-4"></div>
     </div>
 </center>
 
@@ -109,119 +109,6 @@
     <center><div class="col-xs-12"><button type="button" class="btn btn-info btn-lg" id="btnSaveDownload">Download As Image</button>&nbsp;<button type="button" class="btn btn-info btn-lg" id="btnReset">Reset</button>
                 &nbsp;<button type="button" class="btn btn-info btn-lg" id="btnOpenModal">Open</button></div></center>
 </div>
-
-<!-- Modal -->
-<div class="modal modal-vcenter fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">Process Information Detail</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xs-8"><p style="text-align:center" id="id_process"></p></div>
-                    <div class="col-xs-3 pushmarginform" style="border:2px; border-color:darkblue; border-radius:5px; border-style:dotted;">
-                        <div class="ex-input-output" style="background-color:#5BC0DE;"></div><div style="margin-top: 8px;"><font face="Tahoma"><i>Input</i>&nbsp; <b>%</b></font></div>
-                        <br />
-                        <div class="ex-input-output" style="background-color:#5CB85C;"></div><div style="margin-top: 8px;"><font face="Tahoma"><i>Output</i>&nbsp; <b>%</b></font></div>
-                    </div>
-                    <div class="col-xs-1"></div>
-                </div>
-
-                <br /><br />
-                <div class="row pushmarginform">
-                    <div class="col-xs-1"></div>
-                    <div class="col-xs-5">
-                        <label id="stylecool">Display Process Name:</label>
-                    </div>
-                    <div class="col-xs-5">
-                        <input type="text" name="process" class="form-control" id="process-name" />
-                    </div>
-                    <div class="col-xs-1"></div>
-                </div>
-
-                <div class="row pushmarginform">
-                    <div class="col-xs-1"></div>
-                    <div class="col-xs-5">
-                        <label id="stylecool">Enter Input Percentage:</label>
-                    </div>
-                    <div class="col-xs-5">
-                        <input type="text" name="process" class="form-control" id="process-input-percentage" />
-                    </div>
-                    <div class="col-xs-1"></div>
-
-                </div>
-
-                <div class="row pushmarginform">
-                    <div class="col-xs-1"></div>
-                    <div class="col-xs-5">
-                        <label id="stylecool">Enter Output Percentage:</label>
-                    </div>
-                    <div class="col-xs-5">
-                        <input type="text" name="process" class="form-control" id="process-output-percentage" />
-                    </div>
-                    <div class="col-xs-1"></div>
-                </div>
-            </div>
-            
-            <div class="modal-footer">
-                <div class="col-md-5">
-                    <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Add</a>
-                    <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Edit</a>
-                    <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Delete</a>
-                </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-4">
-                    <button class="btn btn-info" data-dismiss="modal" id="btnSave">Save</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<!-- Second Modal -->
-<div class="modal modal-vcenter fade" id="myModal3">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Material Input</h4>
-
-            </div>
-            <div class="container"></div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4"><label id="stylecool">Material Name: </label><input type="text" class="form-control" /></div>
-                    <div class="col-md-4"><label id="stylecool">Quantity: </label><input type="text" class="form-control" /></div>
-                    <div class="col-md-4"><label id="stylecool">Unit: </label><input type="text" class="form-control" /></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6"><label id="stylecool">Carbon Storage: </label><input type="text" class="form-control" /></div>
-                    <div class="col-md-6"><label id="stylecool">Activity Data Origin: </label><input type="text" class="form-control" /></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6"><label id="stylecool">Emissions Factor: </label><input type="text" class="form-control" /></div>
-                    <div class="col-md-6"><label id="stylecool">Emissions Factor Source: </label><input type="text" class="form-control" /></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12"><label id="stylecool">Remarks: </label><input type="text" class="form-control" /></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#" data-dismiss="modal" class="btn">Close</a>
-                <a href="#" data-dismiss="modal" class="btn btn-primary">Save changes</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <!-- Thrid Modal  --> 
 <div class="modal modal-vcenter fade" id="myModal4">
@@ -326,24 +213,23 @@
                                     <div class="col-md-8"></div>
                                 </div>
 
-                                    <div class="form-group row pushmarginform">
-                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutput[0].name"/></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutput[0].qty"/></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutput[0].unit"/></div>
-                                        <div class="col-md-1"></div>
-                                    </div>
+                                <div class="form-group row pushmarginform">
+                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutput[0].name"/></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutput[0].qty"/></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutput[0].unit"/></div>
+                                    <div class="col-md-1"></div>
+                                </div>
 
-                                    <div class="form-group row pushmarginform hide" id="template-material-output">
-                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutputName"/></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutputQty"/></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutputUnit"/></div>
-                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialOutput"><span class="glyphicon glyphicon-remove"></span></button></div>
-                                    </div>
+                                <div class="form-group row pushmarginform hide" id="template-material-output">
+                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutputName"/></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutputQty"/></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutputUnit"/></div>
+                                    <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialOutput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                </div>
 
                             </section>
                             <h3>Determine energy input</h3>
                             <section>
-
                                 <div class="row">
                                     <div class="col-md-10"></div>
                                     <div class="col-md-2"><button class="btn btn-primary" id="btnAddEInput">Add material</button></div>
@@ -354,31 +240,26 @@
                                     <div class="col-md-8"></div>
                                 </div>
                                
-                                    <div class="form-group row pushmarginform">
-                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInput[0].name" /></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInput[0].qty" /></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInput[0].unit" /></div>
-                                        <div class="col-md-1"></div>
-                                    </div>
+                                <div class="form-group row pushmarginform">
+                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInput[0].name" /></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInput[0].qty" /></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInput[0].unit" /></div>
+                                    <div class="col-md-1"></div>
+                                </div>
 
-                                    <div class="form-group row pushmarginform hide" id="template-energy-input">
-                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInputName" /></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInputQty" /></div>
-                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInputUnit" /></div>
-                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveEnergyInput"><span class="glyphicon glyphicon-remove"></span></button></div>
-                                    </div>
+                                <div class="form-group row pushmarginform hide" id="template-energy-input">
+                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInputName" /></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInputQty" /></div>
+                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInputUnit" /></div>
+                                    <div class="col-md-1"><button class="btn btn-warning btnRemoveEnergyInput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                </div>
                             </section>
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
             <div class="modal-footer">
-                <a href="#" data-dismiss="modal" class="btn">Close</a>
-                <a href="#" data-dismiss="modal" class="btn btn-primary">Save changes</a>
+                <a href="#" data-dismiss="modal" class="btn btn-danger">Close</a>
             </div>
         </div>
     </div>

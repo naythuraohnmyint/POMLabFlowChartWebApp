@@ -93,10 +93,10 @@
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    var processIndex = 0;
-    var mInputIndex = 0;
-    var mOutputIndex = 0;
-    var eInputIndex = 0;
+    window.processIndex = 0;
+    window.mInputIndex = 0;
+    window.mOutputIndex = 0;
+    window.eInputIndex = 0;
   /*  var mInputNameValidators = {
         row: '.col-md-5',   // The title is placed inside a <div class="col-xs-4"> element
         validators: {
@@ -133,7 +133,7 @@
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
     $("#btnAddProcessType").click(function () {
-        processIndex++;
+        window.processIndex++;
         var $template = $("#template-process-type");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-process-type', processIndex).insertBefore($template);
 
@@ -144,13 +144,14 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-process-type');
         $row.remove();
+        window.processIndex--;
     });
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
     $("#btnAddMInput").click(function () {
-        mInputIndex++;
+        window.mInputIndex++;
         var $template = $("#template-material-input");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-mInput-type', mInputIndex).insertBefore($template);
 
@@ -173,6 +174,7 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-mInput-type');
         $row.remove();
+        window.mInputIndex--;
     });
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -196,7 +198,7 @@
     /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
     $("#btnAddMOutput").click(function () {
-        mOutputIndex++;
+        window.mOutputIndex++;
         var $template = $("#template-material-output");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-mOutput-type', mOutputIndex).insertBefore($template);
 
@@ -217,12 +219,13 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-mOutput-type');
         $row.remove();
+        window.mOutputIndex--;
     });
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
     $("#btnAddEInput").click(function () {
-        eInputIndex++;
+        window.eInputIndex++;
         var $template = $("#template-energy-input");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-energy-input', eInputIndex).insertBefore($template);
 
@@ -243,6 +246,7 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-energy-input');
         $row.remove();
+        window.eInputIndex--;
     });
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -251,11 +255,11 @@
     window.currentID;
     window.setcurrentID = function (currentIDparam)
     {
-        currentID = currentIDparam;
+        window.currentID = currentIDparam;
     };
 
-    window.getcurrentID = function (currentIDparam) {
-        return currentID;
+    window.getcurrentID = function () {
+        return window.currentID;
     };
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -271,7 +275,7 @@
         }
         else {
             alert("id: " + event.target.id + "class: " + event.target.class);
-            setcurrentID(event.target.id);
+            //setcurrentID(event.target.id);
 
             var returnObjArr = JSON.parse(localStorage.getItem("processObjStorage"));
 
@@ -335,6 +339,7 @@
         }
 
         for (var i = 0; i <= mOutputIndex; i++) {
+            alert("Name: " + $("[name='mOutput[" + i + "].name']").val() + ", Qty:" + $("[name='mOutput[" + i + "].qty']").val() + ", Unit: " + $("[name='mOutput[" + i + "].unit']").val());
             var mOutputObj = { 'name': $("[name='mOutput[" + i + "].name']").val(), 'qty': $("[name='mOutput[" + i + "].qty']").val(), 'unit': $("[name='mOutput[" + i + "].unit']").val() };
             mOutput_arr[i] = mOutputObj;
         }
@@ -379,6 +384,7 @@
             var mInputTotal = 0;
             var mOutputTotal = 0;
             var eInputTotal = 0;
+            var bootstrap_color = ["primary","success", "info", "warning", "danger"];
 
             var inputTotal = 0;
 
@@ -392,54 +398,41 @@
                 eInputTotal += parseInt(eInput_arr[i].qty);
             }
            // alert("Total: " + mInputTotal +" , "+mOutputTotal+" , "+eInputTotal);
-
            // inputTotal = mInputTotal + eInputTotal;
-            
-
-
             var spancol_input = $('<span style="margin-left:-43px; margin-top:-14px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
             var spancontainer_input = $('<span />').attr({ 'class': 'container' });
             var spanprogressvertical_input = $('<span />').attr({ 'class': 'progress vertical leftcontainer' });
             var progressinfo_input = "";
 
-            for (var i = 0; i < mInput_arr.length; i++) {
-             
              if (mInput_arr.length == 1)
              {
-                 progressinfo_input += '<span class="progress-bar progress-bar-info" style="width:100%" title="'+mInput_arr[i].name +' : '+mInput_arr[i].qty+' '+mInput_arr[i].unit+'"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
-                 break;
+                 progressinfo_input += '<span class="progress-bar progress-bar-info" style="width:100%" title="'+mInput_arr[0].name +' : '+mInput_arr[0].qty+' '+mInput_arr[0].unit+'"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
+                
              }
-             else if (mInput_arr.length == 2)
+             else 
              {
-                 var fNum = parseFloat(mInput_arr[i].qty);
-                 var sNum = parseFloat(mInput_arr[i + 1].qty);
-                 if (fNum === sNum) {
-                     progressinfo_input += '<span class="progress-bar progress-bar-success" style="width:50%" title="' + mInput_arr[i].name + ' : ' + mInput_arr[i].qty + ' ' + mInput_arr[i].unit + '"><span class="text_input_percentage" style="color:black; font-weight:bold">50%</span></span><span class="progress-bar progress-bar-info" style="width:50%" title="' + mInput_arr[i+1].name + ' : ' + mInput_arr[i+1].qty + ' ' + mInput_arr[i+1].unit + '"><span class="text_input_percentage" style="color:black; font-weight:bold">50%</span></span>';
-                     break;
+                 var totalNum = 0;
+                 var totalPer = [];
+                 
+
+                 for (var j = 0; j < mInput_arr.length; j++)
+                 {
+                     totalNum += parseFloat(mInput_arr[j].qty);
                  }
-                 else {
-                     if (fNum > sNum) {
-                         var resDiv = fNum / sNum;
-                         var resDivAdd = resDiv + 1;
-                         var resPortion = 100 / resDivAdd;
-                         var largePortion = Math.round(resDiv * resPortion);
-                         var smallPortion = 100 - largePortion;
-                         progressinfo_input += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
-                         break;
-                     }
-                     else {
-                         var resDiv = sNum / fNum;
-                         var resDivAdd = resDiv + 1;
-                         var resPortion = 100 / resDivAdd;
-                         var largePortion = Math.round(resDiv*resPortion);
-                         var smallPortion = 100 - largePortion;
-                         progressinfo_input += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_input_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
-                         break;
-                     }
+           
+                 for (var k = 0; k < mInput_arr.length; k++) {
+                     totalPer[k] = (100 * (mInput_arr[k].qty / totalNum)).toPrecision(3);
+                     //alert(totalPer[i] + "%");
+                 }
+                 var x = 0;
+                 while (totalPer[x] != null && mInput_arr[x] != null)
+                 {
+                     alert(totalPer[x] + "%" + bootstrap_color[x % bootstrap_color.length]);
+                     progressinfo_input += '<span class="progress-bar progress-bar-' + bootstrap_color[x % bootstrap_color.length] + '" style="width:' + totalPer[x] + '%" title="' + mInput_arr[x].name + ' : ' + mInput_arr[x].qty + ' ' + mInput_arr[x].unit + '"><span class="text_input_percentage" style="color:black; font-weight:bold">' + totalPer[x] + '%</span></span>';
+                     x++;
                  }
              }
-
-         }
+         
 
         var spanprogressbarinfo_input = $(progressinfo_input);
         $("#" + currentIDparam).html(spancol_input.html(spancontainer_input.html(spanprogressvertical_input.html(spanprogressbarinfo_input))));
@@ -453,46 +446,40 @@
         var spanprogressvertical_output = $('<span />').attr({ 'class': 'progress vertical rightcontainer' });
         var progressinfo_output = "";
 
-        for (var i = 0; i < mOutput_arr.length; i++) {
 
-            if (mOutput_arr.length == 1) {
-                progressinfo_output += '<span class="progress-bar progress-bar-info" style="width:100%" title="' + mOutput_arr[i].name + ' : ' + mOutput_arr[i].qty + ' ' + mOutput_arr[i].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold">100%</span></span>';
-                break;
-            }
-            else if (mOutput_arr.length == 2) {
-                var fNum = parseFloat(mOutput_arr[i].qty);
-                var sNum = parseFloat(mOutput_arr[i + 1].qty);
-                if (fNum === sNum) {
-                    progressinfo_output += '<span class="progress-bar progress-bar-success" style="width:50%" title="' + mOutput_arr[i].name + ' : ' + mOutput_arr[i].qty + ' ' + mOutput_arr[i].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold" title="' + mOutput_arr[i+1].name + ' : ' + mOutput_arr[i+1].qty + ' ' + mOutput_arr[i+1].unit + '">50%</span></span><span class="progress-bar progress-bar-info" style="width:50%"><span class="text_output_percentage" style="color:black; font-weight:bold">50%</span></span>';
-                    break;
-                }
-                else {
-                    if (fNum > sNum) {
-                        var resDiv = fNum / sNum;
-                        var resDivAdd = resDiv + 1;
-                        var resPortion = 100 / resDivAdd;
-                        var largePortion = Math.round(resDiv * resPortion);
-                        var smallPortion = 100 - largePortion;
-                        progressinfo_output += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
-                        break;
-                    }
-                    else {
-                        var resDiv = sNum / fNum;
-                        var resDivAdd = resDiv + 1;
-                        var resPortion = 100 / resDivAdd;
-                        var largePortion = Math.round(resDiv * resPortion);
-                        var smallPortion = 100 - largePortion;
-                        progressinfo_output += '<span class="progress-bar progress-bar-success" style="width:' + largePortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + largePortion + '%</span></span><span class="progress-bar progress-bar-info" style="width:' + smallPortion + '%"><span class="text_output_percentage" style="color:black; font-weight:bold">' + smallPortion + '%</span></span>';
-                        break;
-                    }
-                }
-            }
-
+        if (mOutput_arr.length == 1) {
+            progressinfo_output += '<span class="progress-bar progress-bar-info" style="width:100%" title="' + mOutput_arr[0].name + ' : ' + mOutput_arr[0].qty + ' ' + mOutput_arr[0].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold">100%</span></span>';
         }
+        else {
+            var totalNum = 0;
+            var totalPer = [];
+
+            for (var j = 0; j < mOutput_arr.length; j++) {
+                totalNum += parseFloat(mOutput_arr[j].qty);
+            }
+
+            for (var k = 0; k < mOutput_arr.length; k++) {
+                totalPer[k] = (100 * (mOutput_arr[k].qty / totalNum)).toPrecision(3);
+                //alert(totalPer[i] + "%");
+            }
+            var x = 0;
+            while (totalPer[x] != null && mOutput_arr[x] != null) {
+                // alert(totalPer[x] + "%" + bootstrap_color[x % bootstrap_color.length]);
+                progressinfo_output += '<span class="progress-bar progress-bar-' + bootstrap_color[x % bootstrap_color.length] + '" style="width:' + totalPer[x] + '%" title="' + mOutput_arr[x].name + ' : ' + mOutput_arr[x].qty + ' ' + mOutput_arr[x].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold">' + totalPer[x] + '%</span></span>';
+                x++;
+            }
+        }
+        
 
         var spanprogressbarinfo_output = $(progressinfo_output);
         $("#" + currentIDparam).append(spancol_output.html(spancontainer_output.html(spanprogressvertical_output.html(spanprogressbarinfo_output))));
 
+        if (mInputTotal === mOutputTotal) {
+            $("#" + currentIDparam).removeClass('dashed-progress').addClass('complete-progress');
+        }
+        else {
+            $("#" + currentIDparam).removeClass('complete-progress').addClass('dashed-progress');
+        }
             if (window.debug)
             {
                 var str = "";
@@ -524,61 +511,6 @@
         }
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-    $('#btnSave').click(function (event) {
-
-        var current_id = $('#id_process').text();
-        var text_process_name = $('#process-name').val();
-        var text_process_input_per = $('#process-input-percentage').val();
-        var text_process_output_per = $('#process-output-percentage').val();
-        var flag = true;
-
-        processObj = { 'current_id': current_id, 'proces_name': text_process_name, 'process_input_percentage': text_process_input_per, 'process_output_percentage': text_process_output_per };
-
-        var returnObjArr = JSON.parse(localStorage.getItem("processObjStorage"));
-
-        if (returnObjArr != null) {
-            for (var i = 0; i < returnObjArr.length; i++) {
-                var obj = JSON.parse(returnObjArr[i]);
-                if (obj.current_id === current_id) {
-
-                    obj.proces_name = processObj.proces_name;
-                    obj.process_input_percentage = processObj.process_input_percentage;
-                    obj.process_output_percentage = processObj.process_output_percentage;
-
-                    returnObjArr[i] = JSON.stringify(obj);
-                    flag = false;
-                    localStorage.setItem("processObjStorage", JSON.stringify(returnObjArr));
-                    break;
-                }
-            }
-        }
-        if (flag)
-        {
-            processObjArr.push(JSON.stringify(processObj));
-            localStorage.setItem("processObjStorage", JSON.stringify(processObjArr));
-        }
-        
-        returnObjArr = null;
-        returnObjArr = JSON.parse(localStorage.getItem("processObjStorage"));
-
-        for (var i = 0; i < returnObjArr.length; i++) {
-            var obj = JSON.parse(returnObjArr[i]);
-            if (current_id === obj.current_id)
-            {
-                $("#" + obj.current_id).find(".leftcontainer").find(".progress-bar").css('width', obj.process_input_percentage + "%");
-                $("#" + obj.current_id).find(".leftcontainer").find(".text_input_percentage").html(obj.process_input_percentage + "%");
-               
-                $("#" + obj.current_id).find(".midcontainer").find(".text_process_name").html(obj.proces_name);
-                
-                $("#" + obj.current_id).find(".rightcontainer").find(".progress-bar").css('width', obj.process_output_percentage + "%");
-                $("#" + obj.current_id).find(".rightcontainer").find(".text_output_percentage").html(obj.process_output_percentage + "%");
-
-       
-            } 
-        }
-    });
-    /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
    
     $("#droppable").selectable();
@@ -598,7 +530,7 @@
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
     var newbox;
     var process_id_arr = [];
-    var count = 0;
+    window.count = 0;
 
 
     $("#droppable").droppable({
@@ -609,6 +541,7 @@
 
             if ($(ui.draggable).attr("id") === "flowchartWindow") {
                 count++;
+                setcurrentID("flowchartWindow" + count);
                 process_id_arr.push("flowchartWindow" + count);
                 newbox = ui.helper.clone();
 
@@ -716,9 +649,7 @@
                     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
                         for (var i = 0; i < sourceAnchors.length; i++) {
                             var sourceUUID = toId + sourceAnchors[i];
-                            instance.addEndpoint("flowchart" + toId, sourceEndpoint, {
-                                anchor: sourceAnchors[i], uuid: sourceUUID
-                            });
+                            instance.addEndpoint("flowchart" + toId, sourceEndpoint, { anchor: sourceAnchors[i], uuid: sourceUUID });
                         }
                         for (var j = 0; j < targetAnchors.length; j++) {
                             var targetUUID = toId + targetAnchors[j];
@@ -727,15 +658,17 @@
                     };
 
                     instance.batch(function () {
-
-                        for (var i = 0; i < process_id_arr.length; i++) {
-                            $("#" + process_id_arr[i]).addClass("window jtk-node");
+                        //alert(window.getcurrentID());
+                       for (var i = 0; i < process_id_arr.length; i++) {
                             var j = i + 1;
-                            var str = "Window"+j;
+                        //for (var i = 0; i <window.count; i++) {
+                           //   var str = "Window" + parseInt(i+1);
+                            var str ="Window"+j;
+                            alert("str: " + str);
                             _addEndpoints(str, ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
-                            instance.draggable(jsPlumb.getSelector(".process-box"), { grid: [-20, -20] });
-                            
-                        }
+                            instance.draggable(jsPlumb.getSelector("#" + window.getcurrentID()), { grid: [-20, -20] });
+                        //}
+                       }
 
                         instance.bind("connection", function (connInfo, originalEvent) {
                             init(connInfo.connection);
