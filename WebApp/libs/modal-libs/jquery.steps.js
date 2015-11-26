@@ -1784,7 +1784,7 @@ var defaults = $.fn.steps.defaults = {
      * @default true
      * @for defaults
      **/
-    enableContentCache: true,
+    enableContentCache: false, // Changing Framework
 
     /**
      * Shows the cancel button if enabled.
@@ -1963,7 +1963,8 @@ var defaults = $.fn.steps.defaults = {
      * @default function (event) { }
      * @for defaults
      **/
-    onInit: function (event, currentIndex) { },
+    onInit: function (event, currentIndex) {
+    },
 
     /**
      * Contains all labels. 

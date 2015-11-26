@@ -9,7 +9,7 @@
 
     /* Save-Download Button (Convert Div to JPG) */
 
-    $("#btnSaveDownload").click(function (event) {
+    $("button#btnSaveDownload").click(function (event) {
 
         $('.draggable > .input_percentage_progress').css('margin-top', "-53px");
         $('.draggable > .output_percentage_progress').css('margin-top', "-53px");
@@ -51,8 +51,7 @@
 
 
     /* Click Reset button to clear localstorage */
-
-    $("#btnReset").click(function (event) {
+    $(document).on('click', 'button#btnReset', function (event) {
         //window.ResetIndex();
         localStorage.removeItem("processObjStorage");
         alert("Clear Successful");
@@ -88,8 +87,7 @@
 
     /* Open Tab Modal */
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-    $("#btnOpenModal").click(function () {
+    $(document).on('click', 'button#btnOpenModal', function () {
         $("#myModal4").remove();
         myBackup.modal('show');
 
@@ -147,13 +145,16 @@
 
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    $("#btnAddProcessType").click(function () {
+
+    $(document).on('click', 'button#btnAddProcessType', function () {
         window.processIndex++;
         var $template = $("#template-process-type");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-process-type', processIndex).insertBefore($template);
 
         $clone.find('[name="typeofprocess"]').attr('name', 'typeofprocess[' + processIndex + '].name').end();
     });
+
+    // Important Note: Dynamic created button event listener
 
     $(document).on('click', 'button.btnRemoveProcessType', function () {
         var $row = $(this).parents('.form-group'),
@@ -165,7 +166,7 @@
 
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    $("#btnAddMInput").click(function () {
+    $(document).on('click', 'button#btnAddMInput', function () {
         window.mInputIndex++;
         var $template = $("#template-material-input");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-mInput-type', mInputIndex).insertBefore($template);
@@ -211,8 +212,7 @@
     */
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-    $("#btnAddMOutput").click(function () {
+    $(document).on('click', 'button#btnAddMOutput', function () {
         window.mOutputIndex++;
         var $template = $("#template-material-output");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-mOutput-type', mOutputIndex).insertBefore($template);
@@ -238,8 +238,7 @@
     });
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-    $("#btnAddEInput").click(function () {
+    $(document).on('click', 'button#btnAddEInput', function () {
         window.eInputIndex++;
         var $template = $("#template-energy-input");
         var $clone = $template.clone().removeClass("hide").removeAttr("id").attr('data-energy-input', eInputIndex).insertBefore($template);
@@ -287,8 +286,7 @@
     
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-    $('div#droppable').dblclick(function (event) {
+    $(document).on("dblclick", "div#droppable", function (event){
         if (event.target.id === "") {
             alert("null");
         }
