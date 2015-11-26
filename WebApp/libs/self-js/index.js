@@ -4,6 +4,9 @@
     var returnObjArr = [];
     window.debug = false;
 
+    // Clone the modal dialog
+    var myBackup = $("#myModal4").clone();
+
     /* Save-Download Button (Convert Div to JPG) */
 
     $("#btnSaveDownload").click(function (event) {
@@ -87,7 +90,9 @@
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     $("#btnOpenModal").click(function () {
-        $('#myModal4').modal('show');
+        $("#myModal4").remove();
+        myBackup.modal('show');
+
     });
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -587,8 +592,6 @@
                 newbox = ui.helper.clone();
 
                 var n = newbox.appendTo($(this)).attr('id', process_id_arr[count - 1]).addClass('process-box').addClass('dashed-progress');
-
-
                 /* Plumb */
 
                 jsPlumb.ready(function () {
