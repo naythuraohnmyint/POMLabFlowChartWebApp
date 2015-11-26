@@ -2,7 +2,6 @@
     var processObj;
     var processObjArr = [];
     var returnObjArr = [];
-    var modalflag;
     window.debug = false;
 
     /* Save-Download Button (Convert Div to JPG) */
@@ -22,13 +21,13 @@
             useCORS:true,
             onrendered: function (canvas) {
 
-        var img = canvas.toDataURL("image/png");
-        $('.draggable > .input_percentage_progress').css('margin-top', "-12px");
-        $('.draggable > .output_percentage_progress').css('margin-top', "-12px");
-        $('.draggable > .input_percentage_progress').css('margin-left', "-43px");
-        $('.draggable > .output_percentage_progress').css('margin-left', "-45px");
+                var img = canvas.toDataURL("image/png");
+                $('.draggable > .input_percentage_progress').css('margin-top', "-12px");
+                $('.draggable > .output_percentage_progress').css('margin-top', "-12px");
+                $('.draggable > .input_percentage_progress').css('margin-left', "-43px");
+                $('.draggable > .output_percentage_progress').css('margin-left', "-45px");
 
-        window.open(img);
+                window.open(img);
             }
         });
     });
@@ -51,6 +50,7 @@
     /* Click Reset button to clear localstorage */
 
     $("#btnReset").click(function (event) {
+        //window.ResetIndex();
         localStorage.removeItem("processObjStorage");
         alert("Clear Successful");
     });
@@ -93,42 +93,52 @@
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
     window.processIndex = 0;
     window.mInputIndex = 0;
     window.mOutputIndex = 0;
     window.eInputIndex = 0;
-  /*  var mInputNameValidators = {
-        row: '.col-md-5',   // The title is placed inside a <div class="col-xs-4"> element
-        validators: {
-            notEmpty: {
-                message: 'The title is required'
-            }
-        }
-    };
 
-    var mInputQtyValidators = {
-        row: '.col-md-3',
-        validators: {
-            notEmpty: {
-                message: 'The price is required'
-            },
-            numeric: {
-                message: 'The price must be a numeric number'
-            }
-        }
-    };
-
-    var mInputUnitValidators = {
-        row: '.col-md-3',
-        validators: {
-            notEmpty: {
-                message: 'The ISBN is required'
-            },
-            isbn: {
-                message: 'The ISBN is not valid'
-            }
-        }
-    };*/
+    window.ResetIndex = function ()
+    {
+        alert("Reset Index!!");
+        window.processIndex = 0;
+        window.mInputIndex = 0;
+        window.mOutputIndex = 0;
+        window.eInputIndex = 0;
+    }
+    /*  var mInputNameValidators = {
+          row: '.col-md-5',   // The title is placed inside a <div class="col-xs-4"> element
+          validators: {
+              notEmpty: {
+                  message: 'The title is required'
+              }
+          }
+      };
+  
+      var mInputQtyValidators = {
+          row: '.col-md-3',
+          validators: {
+              notEmpty: {
+                  message: 'The price is required'
+              },
+              numeric: {
+                  message: 'The price must be a numeric number'
+              }
+          }
+      };
+  
+      var mInputUnitValidators = {
+          row: '.col-md-3',
+          validators: {
+              notEmpty: {
+                  message: 'The ISBN is required'
+              },
+              isbn: {
+                  message: 'The ISBN is not valid'
+              }
+          }
+      };*/
 
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -264,49 +274,78 @@
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+    
+    $(window).bind('beforeunload', function () {
+        //return "Do you want to save your flowchart project?";
+        localStorage.removeItem("processObjStorage");
+    });
+    
+
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     $('div#droppable').dblclick(function (event) {
-
-        modalflag = true;
-
         if (event.target.id === "") {
             alert("null");
         }
         else {
             alert("id: " + event.target.id + "class: " + event.target.class);
-            //setcurrentID(event.target.id);
-
             var returnObjArr = JSON.parse(localStorage.getItem("processObjStorage"));
-
             if (returnObjArr != null) {
                 for (var i = 0; i < returnObjArr.length; i++) {
                     var obj = JSON.parse(returnObjArr[i]);
-
                     if (obj.current_id === event.target.id) {
-
                         $("#real-process-name").val(obj.real_process_name);
                         $("#display-process-name").val(obj.display_process_name);
-
-                        var process_arr = obj.process_names;
-
-                       // for (var i = 0; i < process_arr.length; i++)
-                       // {
-                            // alert(process_arr[i])
-                       // }
                         $("#process-description").val(obj.process_desc);
-                        //  obj.mInput_obj_arr
-                        //  obj.mOutput_obj_arr
-                        //  obj.eInput_obj_arr
+                        var current_process_arr = JSON.parse(JSON.stringify(obj.process_names));
+                        var current_mInput_arr = JSON.parse(JSON.stringify(obj.mInput_obj_arr));
+                        var current_mOutput_arr = JSON.parse(JSON.stringify(obj.mOutput_obj_arr));
+                        var current_eInput_arr = JSON.parse(JSON.stringify(obj.eInput_obj_arr));
+                      
 
-                        returnObjArr[i] = JSON.stringify(obj);
-                        modifyflag = false;
-                        localStorage.setItem("processObjStorage", JSON.stringify(returnObjArr));
-                        break;
+                        if (current_process_arr.length !== 0) {
+                            for (var i = 0; i < current_process_arr.length; i++) {
+                                alert("P : " + current_process_arr[i].name);
+                            }
+                        }
+                        else {
+                            alert("Underfined Process Names");
+                        }
+                        
+                        if (current_mInput_arr.length !== 0) {
+                            for (var i = 0; i < current_mInput_arr.length; i++) {
+                                alert("MI : " + current_mInput_arr[i].name);
+                            }
+                        }
+                        else {
+                            alert("Underfined Material Inputs");
+                        }
+
+                        if (current_mOutput_arr.length !== 0)
+                        {
+                            for (var i = 0; i < current_mOutput_arr.length; i++) {
+                                alert("MO : " + current_mOutput_arr[i].name);
+                            }
+                        }
+                        else {
+                            alert("Underfined Material Outputs");
+                        }
+                        
+                        if (current_eInput_arr.length !== 0) {
+                            for (var i = 0; i < current_eInput_arr.length; i++) {
+                                alert("EI : " + current_eInput_arr[i].name);
+                            }
+                        }
+                        else {
+                            alert("Underfined Energy Inputs");
+                        }
                     }
                 }
             }
-                $('#myModal4').modal('show');
+            else {
+
+            }
+            $('#myModal4').modal('show');
         }
         
     });
@@ -328,10 +367,12 @@
        
         for (var i = 0; i <=processIndex; i++)
         {
-            type_of_process_arr[i] = $("[name='typeofprocess[" + i + "].name']").val();
+            type_of_process_arr[i] = {'name' : $("[name='typeofprocess[" + i + "].name']").val()};
         }
 
         process_desc = $("#process-description").val();
+
+        alert("mInputIndex: " + mInputIndex + " " + "mOuputIndex: " + mOutputIndex + " " + "eIndexIndex: " + eInputIndex);
 
         for (var i = 0; i <= mInputIndex; i++) {
             var mInputObj = { 'name': $("[name='mInput[" + i + "].name']").val(), 'qty': $("[name='mInput[" + i + "].qty']").val(), 'unit': $("[name='mInput[" + i + "].unit']").val() };
@@ -397,8 +438,7 @@
             for (var i = 0; i < eInput_arr.length; i++) {
                 eInputTotal += parseInt(eInput_arr[i].qty);
             }
-           // alert("Total: " + mInputTotal +" , "+mOutputTotal+" , "+eInputTotal);
-           // inputTotal = mInputTotal + eInputTotal;
+           
             var spancol_input = $('<span style="margin-left:-43px; margin-top:-14px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
             var spancontainer_input = $('<span />').attr({ 'class': 'container' });
             var spanprogressvertical_input = $('<span />').attr({ 'class': 'progress vertical leftcontainer' });
@@ -540,6 +580,7 @@
         drop: function (event, ui) {
 
             if ($(ui.draggable).attr("id") === "flowchartWindow") {
+                window.ResetIndex();
                 count++;
                 setcurrentID("flowchartWindow" + count);
                 process_id_arr.push("flowchartWindow" + count);
