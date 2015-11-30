@@ -26,8 +26,8 @@
     -webkit-box-shadow: 2px 2px 19px #aaa;
     -moz-box-shadow: 2px 2px 19px #aaa;
     background-color:lightcyan;
-    width: 145px;
-    height: 90px; 
+    width: 205px;
+    height: 95px; 
     border: gray 2px solid;
     border-radius:5px;
     text-align:center;
@@ -126,14 +126,20 @@
 }
 .vertical {
   display: inline-block;
-  width: 86px;
+  width: 92px;
   height: 31px;
   -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
   transform: rotate(-90deg);
-}
-.vertical {
   box-shadow: inset 0px 4px 6px #ccc;
 }
+
+.horizontal-process {
+  display: inline-block;
+  width: 92px;
+  height: 31px;
+  box-shadow: inset 0px 4px 6px #ccc;
+}
+
 .progress-bar {
   box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
 }

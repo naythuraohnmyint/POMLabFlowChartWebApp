@@ -490,7 +490,7 @@
                 eInputTotal += parseInt(eInput_arr[i].qty);
             }
            
-            var spancol_input = $('<span style="margin-left:-43px; margin-top:-14px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
+            var spancol_input = $('<span style="margin-left:-46px; margin-top:-11px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
             var spancontainer_input = $('<span />').attr({ 'class': 'container' });
             var spanprogressvertical_input = $('<span />').attr({ 'class': 'progress vertical leftcontainer' });
             var progressinfo_input = "";
@@ -526,15 +526,25 @@
         var spanprogressbarinfo_input = $(progressinfo_input);
         $("#" + currentIDparam).html(spancol_input.html(spancontainer_input.html(spanprogressvertical_input.html(spanprogressbarinfo_input))));
 
-        var divprocessName = $('<div style="margin-left:20px;" />').attr({ 'class': 'col-md-8' });
+        
+        var divprocessName = $('<div style="margin-left:33px"/>').attr({ 'class': 'col-md-8' });
+        /*
+        var spanrow_ee = $('<span style="margin-left:10px; margin-top:-20px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
+        var spancontainer_ee = $('<span />').attr({ 'class': 'container' });
+        var spanprogresshorizontal_ee = $('<span />').attr({ 'class': 'progress horizontal-process leftcontainer' });
+        var progressinfo_ee = '<span class="progress-bar progress-bar-info" style="width:100%"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
+
+        var spanprogressbarinfo_ee = $(progressinfo_ee);
+        $("#" + currentIDparam).append(spanrow_ee.html(spancontainer_ee.html(spanprogresshorizontal_ee.html(spanprogressbarinfo_ee))));
+        */
+
         var ptag_processName = $('<p class="text_process_name"/>').text(display_process_name);
         $("#" + currentIDparam).append(divprocessName.append(ptag_processName));
 
-        var spancol_output = $('<span style="margin-left:-46px; margin-top:-14px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
+        var spancol_output = $('<span style="margin-left:-43px; margin-top:-11px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
         var spancontainer_output = $('<span />').attr({ 'class': 'container' });
         var spanprogressvertical_output = $('<span />').attr({ 'class': 'progress vertical rightcontainer' });
         var progressinfo_output = "";
-
 
         if (mOutput_arr.length == 1) {
             progressinfo_output += '<span class="progress-bar progress-bar-info" style="width:100%" title="' + mOutput_arr[0].name + ' : ' + mOutput_arr[0].qty + ' ' + mOutput_arr[0].unit + '"><span class="text_output_percentage" style="color:black; font-weight:bold">100%</span></span>';
@@ -558,7 +568,6 @@
                 x++;
             }
         }
-        
 
         var spanprogressbarinfo_output = $(progressinfo_output);
         $("#" + currentIDparam).append(spancol_output.html(spancontainer_output.html(spanprogressvertical_output.html(spanprogressbarinfo_output))));
