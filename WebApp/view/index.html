@@ -87,18 +87,22 @@
     </div>
 </center>
 
+
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-3 draggable-holder-place">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
+    <div class="col-md-2 draggable-holder-place">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-9">
                 <div class="draggable" id="flowchartWindow">
                     <p id="process-box">Process</p>
                 </div>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-1"></div>
+        </div>
+           
     </div>
-    <div class="col-md-7">
+    <div class="col-md-9">
         <div id="droppable">
         </div>
     </div>
@@ -111,83 +115,95 @@
 </div>
 
 <!-- Thrid Modal  --> 
-<div class="modal modal-vcenter fade" id="myModal4">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Process Setting</h4>
+<!-- <div ng-app="myApp" ng-controller="myCtrl"> -->
+    <div class="modal modal-vcenter fade" id="myModal4">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><b>Process Setting</b></h4>
+                </div>
+                <div class="modal-dialog modal-lg" id="noti-process" style="padding:5px; margin-top:-3px;">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Fail!</strong> Process Information are incorrect. Material Input and Output value 're not match.
+                    </div>
 
-            </div>
-            <div class="container"></div>
-            <div class="modal-body">
-                    
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div id="example-embed">
-                            <h3>Identify Process</h3>
-                            <section>
-                                
-                                <div class="row">
-                                    <div class="col-md-12">Process Name: </div>
-                                </div>
-                                <div class="row pushmarginform">
-                                    <div class="col-md-12"><input type="text" class="form-control" id="real-process-name" placeholder="Enter Process Name"/></div>
-                                </div>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> Process Information are correct.
+                    </div>
+                </div>
+                <div class="container">
+                </div>
+                <div class="modal-body" style="margin-top:-80px;">
 
-                                <div class="row">
-                                    <div class="col-md-12">Display Name: </div>
-                                </div>
-                                <div class="row pushmarginform">
-                                    <div class="col-md-12"><input type="text" class="form-control" id="display-process-name" placeholder="Enter Display Name"/></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-9"></div>
-                                    <div class="col-md-3"><button class="btn btn-primary" id="btnAddProcessType">Add Process Type</button></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">Type of Process Involved: </div>
-                                </div>
-                                
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="example-embed">
+                                <h3>Identify Process</h3>
+                                <section>
 
-                                <div class="form-group row pushmarginform">
-                                    <div class="col-md-11"><input type="text" class="form-control" placeholder="Enter Process" name="typeofprocess[0].name" /></div><div class="col-md-1"></div>
-                                </div>
-
-                                <div class="form-group row pushmarginform hide" id="template-process-type">
-                                    <div class="col-md-11"><input type="text" name="typeofprocess" class="form-control" placeholder="Enter Process"/></div><div class="col-md-1">
-                                        <button class="btn btn-warning btnRemoveProcessType">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </button>
+                                    <div class="row">
+                                        <div class="col-md-12">Process Name: </div>
                                     </div>
-                                </div>
+                                    <div class="row pushmarginform">
+                                        <div class="col-md-12"><input type="text" class="form-control" id="real-process-name" placeholder="Enter Process Name" /></div>
+                                    </div>
 
-                               
-                                <div class="row">
-                                    <div class="col-md-12">Process Description: </div>
-                                </div>
-                                <div class="row pushmarginform">
-                                    <div class="col-md-12"><textarea class="form-control" placeholder="Enter Process Description" id="process-description"></textarea></div>
-                                </div>
-                                 
-                            </section>
-                            <h3>Define process parameter</h3>
-                            <section>
-                               <p>Coming Soon</p>
-                            </section>
-                            <h3>Determine material input/output</h3>
-                            <section>
-                               
-                                <div class="row">
-                                    <div class="col-md-10"></div>
-                                    <div class="col-md-2"><button class="btn btn-primary" id="btnAddMInput">Add material</button></div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-12">Display Name: </div>
+                                    </div>
+                                    <div class="row pushmarginform">
+                                        <div class="col-md-12"><input type="text" class="form-control" id="display-process-name" placeholder="Enter Display Name" /></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9"></div>
+                                        <div class="col-md-3"><button class="btn btn-primary" id="btnAddProcessType">Add Process Type</button></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">Type of Process Involved: </div>
+                                    </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">Material Input: </div>
-                                    <div class="col-md-8"></div>
-                                </div>
-                                
+
+                                    <div class="form-group row pushmarginform">
+                                        <div class="col-md-11"><input type="text" class="form-control" placeholder="Enter Process" name="typeofprocess[0].name" /></div><div class="col-md-1"></div>
+                                    </div>
+
+                                    <div class="form-group row pushmarginform hide" id="template-process-type">
+                                        <div class="col-md-11"><input type="text" name="typeofprocess" class="form-control" placeholder="Enter Process" /></div><div class="col-md-1">
+                                            <button class="btn btn-warning btnRemoveProcessType">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">Process Description: </div>
+                                    </div>
+                                    <div class="row pushmarginform">
+                                        <div class="col-md-12"><textarea class="form-control" placeholder="Enter Process Description" id="process-description"></textarea></div>
+                                    </div>
+
+                                </section>
+                                <h3>Define process parameter</h3>
+                                <section>
+                                    <p>Coming Soon</p>
+                                </section>
+                                <h3>Determine material input/output</h3>
+                                <section>
+
+                                    <div class="row">
+                                        <div class="col-md-10"></div>
+                                        <div class="col-md-2"><button class="btn btn-primary" id="btnAddMInput">Add material</button></div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">Material Input: </div>
+                                        <div class="col-md-8"></div>
+                                    </div>
+
 
                                     <div class="form-group row pushmarginform">
                                         <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mInput[0].name" /></div>
@@ -203,64 +219,64 @@
                                         <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialInput"><span class="glyphicon glyphicon-remove"></span></button></div>
                                     </div>
 
-                                <div class="row">
-                                    <div class="col-md-10"></div>
-                                    <div class="col-md-2"><button class="btn btn-primary" id="btnAddMOutput">Add material</button></div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-10"></div>
+                                        <div class="col-md-2"><button class="btn btn-primary" id="btnAddMOutput">Add material</button></div>
+                                    </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">Material Output: </div>
-                                    <div class="col-md-8"></div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-4">Material Output: </div>
+                                        <div class="col-md-8"></div>
+                                    </div>
 
-                                <div class="form-group row pushmarginform">
-                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutput[0].name"/></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutput[0].qty"/></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutput[0].unit"/></div>
-                                    <div class="col-md-1"></div>
-                                </div>
+                                    <div class="form-group row pushmarginform">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutput[0].name" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutput[0].qty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutput[0].unit" /></div>
+                                        <div class="col-md-1"></div>
+                                    </div>
 
-                                <div class="form-group row pushmarginform hide" id="template-material-output">
-                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutputName"/></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutputQty"/></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutputUnit"/></div>
-                                    <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialOutput"><span class="glyphicon glyphicon-remove"></span></button></div>
-                                </div>
+                                    <div class="form-group row pushmarginform hide" id="template-material-output">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="mOutputName" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="mOutputQty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="mOutputUnit" /></div>
+                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveMaterialOutput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                    </div>
 
-                            </section>
-                            <h3>Determine energy input</h3>
-                            <section>
-                                <div class="row">
-                                    <div class="col-md-10"></div>
-                                    <div class="col-md-2"><button class="btn btn-primary" id="btnAddEInput">Add material</button></div>
-                                </div>
+                                </section>
+                                <h3>Determine energy input</h3>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-10"></div>
+                                        <div class="col-md-2"><button class="btn btn-primary" id="btnAddEInput">Add material</button></div>
+                                    </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">Energy Input: </div>
-                                    <div class="col-md-8"></div>
-                                </div>
-                               
-                                <div class="form-group row pushmarginform">
-                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInput[0].name" /></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInput[0].qty" /></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInput[0].unit" /></div>
-                                    <div class="col-md-1"></div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-md-4">Energy Input: </div>
+                                        <div class="col-md-8"></div>
+                                    </div>
 
-                                <div class="form-group row pushmarginform hide" id="template-energy-input">
-                                    <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInputName" /></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInputQty" /></div>
-                                    <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInputUnit" /></div>
-                                    <div class="col-md-1"><button class="btn btn-warning btnRemoveEnergyInput"><span class="glyphicon glyphicon-remove"></span></button></div>
-                                </div>
-                            </section>
+                                    <div class="form-group row pushmarginform">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInput[0].name" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInput[0].qty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInput[0].unit" /></div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+
+                                    <div class="form-group row pushmarginform hide" id="template-energy-input">
+                                        <div class="col-md-5"><input type="text" class="form-control" placeholder="Name" name="eInputName" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Quantity" name="eInputQty" /></div>
+                                        <div class="col-md-3"><input type="text" class="form-control" placeholder="Unit" name="eInputUnit" /></div>
+                                        <div class="col-md-1"><button class="btn btn-warning btnRemoveEnergyInput"><span class="glyphicon glyphicon-remove"></span></button></div>
+                                    </div>
+                                </section>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="#" data-dismiss="modal" class="btn btn-danger">Close</a>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn btn-danger">Close</a>
+                </div>
             </div>
         </div>
     </div>
-</div>

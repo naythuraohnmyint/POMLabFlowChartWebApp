@@ -4,6 +4,9 @@
     var returnObjArr = [];
     window.debug = false;
 
+    $("#noti-process").find(".alert-danger").hide();
+    $("#noti-process").find(".alert-success").hide();
+
     // Clone the modal dialog
     var myBackup = $("#myModal4").clone();
 
@@ -43,6 +46,12 @@
     $('html').keyup(function (e) {
         if (e.keyCode == 46) {
             $('.ui-selected').remove();
+            window.jsPlumb.remove(window.getcurrentID());
+            window.jsPlumb.detachEveryConnection();
+            window.jsPlumb.deleteEveryEndpoint();
+            window.jsPlumb.reset();
+            alert("Current Deleted");
+
         }
     });
 
@@ -104,11 +113,20 @@
 
     window.ResetIndex = function ()
     {
-        alert("Reset Index!!");
+        //alert("Reset Index!!");
         window.processIndex = 0;
         window.mInputIndex = 0;
         window.mOutputIndex = 0;
         window.eInputIndex = 0;
+    }
+
+    window.SetUpIndex = function (currentProcessIndex, currentmInputIndex, currentmOuputIndex, currenteInputIndex) {
+
+        //alert("Reset Index!!");
+        window.processIndex = currentProcessIndex;
+        window.mInputIndex = currentmInputIndex;
+        window.mOutputIndex = currentmOuputIndex;
+        window.eInputIndex = currenteInputIndex;
     }
     /*  var mInputNameValidators = {
           row: '.col-md-5',   // The title is placed inside a <div class="col-xs-4"> element
@@ -190,7 +208,8 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-mInput-type');
         $row.remove();
-        window.mInputIndex--;
+        if(window.mInputIndex!==0)
+            window.mInputIndex--;
     });
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -234,7 +253,8 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-mOutput-type');
         $row.remove();
-        window.mOutputIndex--;
+        if(window.mOutputIndex!==0)
+            window.mOutputIndex--;
     });
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -260,13 +280,16 @@
         var $row = $(this).parents('.form-group'),
             index = $row.attr('data-energy-input');
         $row.remove();
-        window.eInputIndex--;
+        if(window.eInputIndex !==0)
+            window.eInputIndex--;
     });
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
     window.currentID;
+    window.dblClickCurrentProcessID;
+
     window.setcurrentID = function (currentIDparam)
     {
         window.currentID = currentIDparam;
@@ -276,6 +299,15 @@
         return window.currentID;
     };
 
+    window.setdblclickcurrentID = function (dblcurrentIDparam) {
+        window.dblClickCurrentProcessID = dblcurrentIDparam;
+    };
+
+    window.getdblclickcurrentID = function () {
+        return window.dblClickCurrentProcessID;
+    };
+
+
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     
@@ -284,19 +316,26 @@
         localStorage.removeItem("processObjStorage");
     });
     
-
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
-    $(document).on("dblclick", "div#droppable", function (event){
+
+    $(document).on("dblclick", "div#droppable", function (event) {
+
+        window.setdblclickcurrentID(event.target.id);
+       
         if (event.target.id === "") {
             alert("null");
         }
         else {
-            alert("id: " + event.target.id + "class: " + event.target.class);
+            //alert("id: " + event.target.id + "class: " + event.target.class);
+            
             var returnObjArr = JSON.parse(localStorage.getItem("processObjStorage"));
-            if (returnObjArr != null) {
-                for (var i = 0; i < returnObjArr.length; i++) {
+            if (returnObjArr != null)
+            {
+                for (var i = 0; i < returnObjArr.length; i++)
+                {
                     var obj = JSON.parse(returnObjArr[i]);
-                    if (obj.current_id === event.target.id) {
+                    if (obj.current_id === event.target.id)
+                    {
                         $("#real-process-name").val(obj.real_process_name);
                         $("#display-process-name").val(obj.display_process_name);
                         $("#process-description").val(obj.process_desc);
@@ -304,7 +343,13 @@
                         var current_mInput_arr = JSON.parse(JSON.stringify(obj.mInput_obj_arr));
                         var current_mOutput_arr = JSON.parse(JSON.stringify(obj.mOutput_obj_arr));
                         var current_eInput_arr = JSON.parse(JSON.stringify(obj.eInput_obj_arr));
-                      
+
+                        var current_processIndex = obj.processIndex;
+                        var current_mInputIndex = obj.mInputIndex;
+                        var current_mOutputIndex = obj.mOutputIndex;
+                        var current_eInputIndex = obj.eInputIndex;
+
+                        alert("Current Process Index: " + current_processIndex + ", currentmInputIndex: " + current_mInputIndex + ", currentmOutputIndex: " + current_mOutputIndex + ", currenteInputIndex: " + current_eInputIndex);
 
                         if (current_process_arr.length !== 0) {
                             for (var i = 0; i < current_process_arr.length; i++) {
@@ -342,10 +387,12 @@
                         else {
                             alert("Underfined Energy Inputs");
                         }
+                        break; // critical for time efficiency
                     }
                 }
             }
             else {
+               
 
             }
             $('#myModal4').modal('show');
@@ -356,6 +403,7 @@
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
     window.saveProcess = function (currentIDparam) {
+        //alert("From save Process func: " + currentIDparam);
 
         var real_process_name = $('#real-process-name').val();
         var display_process_name = $('#display-process-name').val();
@@ -375,7 +423,7 @@
 
         process_desc = $("#process-description").val();
 
-        alert("mInputIndex: " + mInputIndex + " " + "mOuputIndex: " + mOutputIndex + " " + "eIndexIndex: " + eInputIndex);
+        //alert("mInputIndex: " + mInputIndex + " " + "mOuputIndex: " + mOutputIndex + " " + "eIndexIndex: " + eInputIndex);
 
         for (var i = 0; i <= mInputIndex; i++) {
             var mInputObj = { 'name': $("[name='mInput[" + i + "].name']").val(), 'qty': $("[name='mInput[" + i + "].qty']").val(), 'unit': $("[name='mInput[" + i + "].unit']").val() };
@@ -383,7 +431,7 @@
         }
 
         for (var i = 0; i <= mOutputIndex; i++) {
-            alert("Name: " + $("[name='mOutput[" + i + "].name']").val() + ", Qty:" + $("[name='mOutput[" + i + "].qty']").val() + ", Unit: " + $("[name='mOutput[" + i + "].unit']").val());
+            //alert("Name: " + $("[name='mOutput[" + i + "].name']").val() + ", Qty:" + $("[name='mOutput[" + i + "].qty']").val() + ", Unit: " + $("[name='mOutput[" + i + "].unit']").val());
             var mOutputObj = { 'name': $("[name='mOutput[" + i + "].name']").val(), 'qty': $("[name='mOutput[" + i + "].qty']").val(), 'unit': $("[name='mOutput[" + i + "].unit']").val() };
             mOutput_arr[i] = mOutputObj;
         }
@@ -392,7 +440,7 @@
             var eInputObj = { 'name': $("[name='eInput[" + i + "].name']").val(), 'qty': $("[name='eInput[" + i + "].qty']").val(), 'unit': $("[name='eInput[" + i + "].unit']").val() };
             eInput_arr[i] = eInputObj;
         }
-        processObj = { 'current_id': currentIDparam, 'real_process_name': real_process_name, 'display_process_name': display_process_name, 'process_names': type_of_process_arr, 'process_desc': process_desc, 'mInput_obj_arr': mInput_arr, 'mOutput_obj_arr': mOutput_arr, 'eInput_obj_arr': eInput_arr };
+        processObj = { 'current_id': currentIDparam, 'real_process_name': real_process_name, 'display_process_name': display_process_name, 'processIndex': processIndex, 'process_names': type_of_process_arr, 'process_desc': process_desc, 'mInput_obj_arr': mInput_arr, 'mInputIndex': mInputIndex, 'mOutput_obj_arr': mOutput_arr, 'mOutputIndex': mOutputIndex, 'eInput_obj_arr': eInput_arr, 'eInputIndex': eInputIndex };
 
 
         var returnObjArr = JSON.parse(localStorage.getItem("processObjStorage"));
@@ -450,14 +498,12 @@
              if (mInput_arr.length == 1)
              {
                  progressinfo_input += '<span class="progress-bar progress-bar-info" style="width:100%" title="'+mInput_arr[0].name +' : '+mInput_arr[0].qty+' '+mInput_arr[0].unit+'"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
-                
              }
              else 
              {
                  var totalNum = 0;
                  var totalPer = [];
                  
-
                  for (var j = 0; j < mInput_arr.length; j++)
                  {
                      totalNum += parseFloat(mInput_arr[j].qty);
@@ -470,7 +516,7 @@
                  var x = 0;
                  while (totalPer[x] != null && mInput_arr[x] != null)
                  {
-                     alert(totalPer[x] + "%" + bootstrap_color[x % bootstrap_color.length]);
+                     //alert(totalPer[x] + "%" + bootstrap_color[x % bootstrap_color.length]);
                      progressinfo_input += '<span class="progress-bar progress-bar-' + bootstrap_color[x % bootstrap_color.length] + '" style="width:' + totalPer[x] + '%" title="' + mInput_arr[x].name + ' : ' + mInput_arr[x].qty + ' ' + mInput_arr[x].unit + '"><span class="text_input_percentage" style="color:black; font-weight:bold">' + totalPer[x] + '%</span></span>';
                      x++;
                  }
@@ -519,9 +565,13 @@
 
         if (mInputTotal === mOutputTotal) {
             $("#" + currentIDparam).removeClass('dashed-progress').addClass('complete-progress');
+            $("#noti-process").find(".alert-danger").hide();
+            $("#noti-process").find(".alert-success").show();
         }
         else {
             $("#" + currentIDparam).removeClass('complete-progress').addClass('dashed-progress');
+            $("#noti-process").find(".alert-success").hide();
+            $("#noti-process").find(".alert-danger").show();
         }
             if (window.debug)
             {
@@ -549,7 +599,7 @@
                 for (var i = 0; i < eInput_arr.length; i++) {
                     str += "Name: " + eInput_arr[i].name + " Qty: " + eInput_arr[i].qty + " Unit: " + eInput_arr[i].unit + "\n";
                 }
-                alert(str);
+                //alert(str);
             }
         }
     /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -592,7 +642,7 @@
                 var n = newbox.appendTo($(this)).attr('id', process_id_arr[count - 1]).addClass('process-box').addClass('dashed-progress');
                 /* Plumb */
 
-                jsPlumb.ready(function () {
+                window.jsPlumb.ready(function () {
 
                     var instance = window.jsp = jsPlumb.getInstance({
                         DragOptions: { cursor: 'pointer', zIndex: 2000 },
@@ -691,32 +741,32 @@
                     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
                         for (var i = 0; i < sourceAnchors.length; i++) {
                             var sourceUUID = toId + sourceAnchors[i];
-                            instance.addEndpoint("flowchart" + toId, sourceEndpoint, { anchor: sourceAnchors[i], uuid: sourceUUID });
+                            instance.addEndpoint("flowchart" + toId, sourceEndpoint, { anchor: sourceAnchors[i], uuid: sourceUUID }); // case sensitive
                         }
                         for (var j = 0; j < targetAnchors.length; j++) {
                             var targetUUID = toId + targetAnchors[j];
-                            instance.addEndpoint("flowchart" + toId, targetEndpoint, { anchor: targetAnchors[j], uuid: targetUUID });
+                            instance.addEndpoint("flowchart" + toId, targetEndpoint, { anchor: targetAnchors[j], uuid: targetUUID }); // case sensitive
                         }
+                        //instance.draggable(jsPlumb.getSelector("#" + "flowchart" + toId), { grid: [0, 0] });
                     };
 
                     instance.batch(function () {
-                        //alert(window.getcurrentID());
-                       for (var i = 0; i < process_id_arr.length; i++) {
+                        for (var i = 0; i <process_id_arr.length; i++) {
                             var j = i + 1;
-                        //for (var i = 0; i <window.count; i++) {
-                           //   var str = "Window" + parseInt(i+1);
                             var str ="Window"+j;
-                            alert("str: " + str);
-                            _addEndpoints(str, ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
-                            instance.draggable(jsPlumb.getSelector("#" + window.getcurrentID()), { grid: [-20, -20] });
-                        //}
-                       }
+                            //alert("str: " + str);
+                            _addEndpoints(str, ["LeftMiddle", "RightMiddle", "TopCenter", "BottomCenter"], ["LeftMiddle", "RightMiddle", "TopCenter", "BottomCenter"]);
+                            
+                        }
 
                         instance.bind("connection", function (connInfo, originalEvent) {
                             init(connInfo.connection);
                         });
 
-                        instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), { grid: [20, 20] });
+                        instance.connect({uuids: [null],editable: true});
+
+                        instance.draggable(jsPlumb.getSelector("#" + window.getcurrentID()), { grid: [0, 0] });
+                        //instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), { grid: [0, 0] });
 
                         instance.bind("click", function (conn, originalEvent) {
                             conn.toggleType("basic");
@@ -737,37 +787,18 @@
                         });
                     });
 
-                    jsPlumb.fire("jsPlumbDemoLoaded", instance);
+                    /*
+                    jsPlumb.batch(function () {
+                        // import here
+                        for (var i = 0, j = process_id_arr.length; i < j; i++) {
+                            jsPlumb.connect(connections[i]);
+                        }
+                    });*/
 
+                    //jsPlumb.fire("jsPlumbDemoLoaded", instance);
 
                 });
                 /* Plumb */
-                /*
-                var spancol_input = $('<span style="margin-left:-43px; margin-top:-12px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
-                var spancontainer_input = $('<span />').attr({ 'class': 'container' });
-                var spanprogressvertical_input = $('<span />').attr({ 'class': 'progress vertical leftcontainer' });
-                var spanprogressbarinfo_input = $('<span role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"/>').attr({ 'class': 'progress-bar progress-bar-info' });
-                var spanpercentage_input = $('<span class="text_input_percentage" style="color:black; font-weight:bold"/>').html("0%");
-
-                n = n.html(spancol_input.html(spancontainer_input.html(spanprogressvertical_input.html(spanprogressbarinfo_input.html(spanpercentage_input)))));
-
-                var divprocessName = $('<div style="margin-left:20px;" />').attr({ 'class': 'col-md-8 midcontainer' });
-                var ptag_processName = $('<p class="text_process_name"/>').text("New Process");
-                var imgview_id = $.trim(process_id_arr[count - 1] + "_view");
-                var imagetag_process = $('<img width="15px" src="../images/attention-to-detail-icon.png" style="margin-top:-20px;"/>').attr("id",imgview_id);
-
-              // $("#" + process_id_arr[count - 1]).append(divprocessName.append(ptag_processName).append(imagetag_process));
-
-                 $("#" + process_id_arr[count - 1]).append(divprocessName.append(ptag_processName));
-
-                var spancol_output = $('<span style="margin-left:-45px; margin-top:-12px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
-                var spancontainer_output = $('<span />').attr({ 'class': 'container' });
-                var spanprogressvertical_output = $('<span />').attr({ 'class': 'progress vertical rightcontainer' });
-                var spanprogressbarinfo_output = $('<span role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"/>').attr({ 'class': 'progress-bar progress-bar-success' });
-                var spanpercentage_output = $('<span class="text_output_percentage" style="color:black; font-weight:bold"/>').html("0%");
-
-                $("#" + process_id_arr[count - 1]).append(spancol_output.html(spancontainer_output.html(spanprogressvertical_output.html(spanprogressbarinfo_output.html(spanpercentage_output)))));
-            */
             }
             
             for (var i = 0; i < process_id_arr.length; i++) {
