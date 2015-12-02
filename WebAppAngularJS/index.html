@@ -3,8 +3,15 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <script src="libs/jquery-libs/jquery-2.1.4.js"></script>
+    <script src="libs/angular-libs/angular.js"></script>
+    <script src="libs/self-js/app.js"></script>
+    <script src="libs/self-js/controller.js"></script>
 </head>
 <body>
-
+    <div ng-app="myWebApp" ng-controller="homeCtrl">
+        Full Name: {{fullName()}}
+    </div>
 </body>
+
 </html>

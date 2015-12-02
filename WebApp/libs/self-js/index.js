@@ -525,23 +525,36 @@
 
         var spanprogressbarinfo_input = $(progressinfo_input);
         $("#" + currentIDparam).html(spancol_input.html(spancontainer_input.html(spanprogressvertical_input.html(spanprogressbarinfo_input))));
-
         
-        var divprocessName = $('<div style="margin-left:33px"/>').attr({ 'class': 'col-md-8' });
-        /*
-        var spanrow_ee = $('<span style="margin-left:10px; margin-top:-20px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
+        var divprocessName = $('<div style="margin-left:33px; margin-top:-105px;"/>').attr({ 'class': 'col-md-8' });
+        
+        var spanrow_ee = $('<span style="margin-left:50px; margin-top:-40px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
         var spancontainer_ee = $('<span />').attr({ 'class': 'container' });
         var spanprogresshorizontal_ee = $('<span />').attr({ 'class': 'progress horizontal-process leftcontainer' });
         var progressinfo_ee = '<span class="progress-bar progress-bar-info" style="width:100%"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
-
         var spanprogressbarinfo_ee = $(progressinfo_ee);
+
         $("#" + currentIDparam).append(spanrow_ee.html(spancontainer_ee.html(spanprogresshorizontal_ee.html(spanprogressbarinfo_ee))));
-        */
 
-        var ptag_processName = $('<p class="text_process_name"/>').text(display_process_name);
+
+        var spanrow_el = $('<span style="margin-left:-33px; margin-top:-10px;"/>').attr({ 'class': 'col-md-2 input_percentage_progress' });
+        var spancontainer_el = $('<span />').attr({ 'class': 'container' });
+        var spanprogresshorizontal_el = $('<span />').attr({ 'class': 'progress horizontal-process leftcontainer' });
+        var progressinfo_el = '<span class="progress-bar progress-bar-info" style="width:100%"><span class="text_input_percentage" style="color:black; font-weight:bold">100%</span></span>';
+        var spanprogressbarinfo_el = $(progressinfo_el);
+
+        $("#" + currentIDparam).append(spanrow_el.html(spancontainer_el.html(spanprogresshorizontal_el.html(spanprogressbarinfo_el))));
+        
+        var ee_text = $('<p style="margin-left:-105px; font-weight:bold"/>').text("EE");
+        var el_text = $('<p style="margin-left:-105px; font-weight:bold"/>').text("EL");
+        var ptag_processName = $('<p class="text_process_name" style="margin-top:10px; font-weight:bold"/>').text(display_process_name);
+
+        $("#" + currentIDparam).append(divprocessName.append(ee_text));
+        $("#" + currentIDparam).append(divprocessName.append(el_text));
         $("#" + currentIDparam).append(divprocessName.append(ptag_processName));
+       
 
-        var spancol_output = $('<span style="margin-left:-43px; margin-top:-11px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
+        var spancol_output = $('<span style="margin-left:125px; margin-top:-98px;"/>').attr({ 'class': 'col-md-2 output_percentage_progress' });
         var spancontainer_output = $('<span />').attr({ 'class': 'container' });
         var spanprogressvertical_output = $('<span />').attr({ 'class': 'progress vertical rightcontainer' });
         var progressinfo_output = "";
@@ -776,7 +789,7 @@
 
                         instance.draggable(jsPlumb.getSelector("#" + window.getcurrentID()), { grid: [0, 0] });
                         //instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), { grid: [0, 0] });
-
+                        
                         instance.bind("click", function (conn, originalEvent) {
                             conn.toggleType("basic");
                             alret("click");

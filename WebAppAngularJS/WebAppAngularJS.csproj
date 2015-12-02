@@ -121,6 +121,10 @@
     <Content Include="libs\other-libs\html2canvas.js" />
     <Content Include="libs\other-libs\placeholder.min.js" />
     <Content Include="libs\self-css\style.css" />
+    <Content Include="libs\self-js\config.js" />
+    <Content Include="libs\self-js\controller.js" />
+    <Content Include="libs\self-js\app.js" />
+    <Content Include="libs\self-js\directives.js" />
     <Content Include="libs\self-js\index.js" />
     <Content Include="packages.config" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.css.map" />
