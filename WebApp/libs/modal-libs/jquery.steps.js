@@ -1895,7 +1895,10 @@ var defaults = $.fn.steps.defaults = {
      * @default function (event, currentIndex, newIndex) { return true; }
      * @for defaults
      **/
-    onStepChanging: function (event, currentIndex, newIndex) { return true; },
+    onStepChanging: function (event, currentIndex, newIndex) {
+        //alert("Changing currentIndex" + currentIndex);
+        return true;
+    },
 
     /**
      * Fires after the step has change. 
@@ -1905,7 +1908,13 @@ var defaults = $.fn.steps.defaults = {
      * @default function (event, currentIndex, priorIndex) { }
      * @for defaults
      **/
-    onStepChanged: function (event, currentIndex, priorIndex) { },
+    onStepChanged: function (event, currentIndex, priorIndex) {
+        // alert("Changed currentIndex" + currentIndex);
+        if (currentIndex === 4) {
+           
+            checkValue();
+        }
+    },
 
     /**
      * Fires after cancelation. 

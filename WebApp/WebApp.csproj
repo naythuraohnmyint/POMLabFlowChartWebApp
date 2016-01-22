@@ -66,20 +66,32 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\arrow.png" />
     <Content Include="images\attention-to-detail-icon.png" />
     <Content Include="images\mct_logo.png" />
     <Content Include="images\simtech-col-transperent.png" />
     <Content Include="images\simtech-col.jpg" />
     <Content Include="index.html" />
     <Content Include="libs\angular-libs\angular.js" />
+    <Content Include="libs\arrowandbox-libs\arrowsandboxes.css" />
+    <Content Include="libs\arrowandbox-libs\arrowsandboxes.js" />
+    <Content Include="libs\arrowandbox-libs\jquery.wz_jsgraphics.js" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.css" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap-theme.min.css" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap.css" />
     <Content Include="libs\bootstrap-3.3.5-libs\css\bootstrap.min.css" />
     <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="libs\bootstrap-3.3.5-libs\js\bootstrap-wizard.js" />
     <Content Include="libs\bootstrap-3.3.5-libs\js\bootstrap.js" />
     <Content Include="libs\bootstrap-3.3.5-libs\js\bootstrap.min.js" />
     <Content Include="libs\bootstrap-3.3.5-libs\js\npm.js" />
+    <Content Include="libs\d3-libs\d3v3.js" />
+    <Content Include="libs\d3-libs\sankey.js" />
+    <Content Include="libs\evol-colourpicker-libs\css\demo.css" />
+    <Content Include="libs\evol-colourpicker-libs\css\evol.colorpicker.css" />
+    <Content Include="libs\evol-colourpicker-libs\css\evol.colorpicker.min.css" />
+    <Content Include="libs\evol-colourpicker-libs\js\evol.colorpicker.js" />
+    <Content Include="libs\evol-colourpicker-libs\js\evol.colorpicker.min.js" />
     <Content Include="libs\jquery-libs\jquery-2.1.4.js" />
     <Content Include="libs\jquery-libs\jquery-ui.css" />
     <Content Include="libs\jquery-libs\jquery-ui.js" />
@@ -120,6 +132,8 @@
     <Content Include="libs\other-libs\formValidation.min.js" />
     <Content Include="libs\other-libs\html2canvas.js" />
     <Content Include="libs\other-libs\placeholder.min.js" />
+    <Content Include="libs\sankey-libs\raphael.js" />
+    <Content Include="libs\sankey-libs\sankey.js" />
     <Content Include="libs\self-js\index.js" />
     <Content Include="libs\self-css\style.css" />
     <Content Include="packages.config" />
@@ -131,6 +145,7 @@
     <Content Include="libs\bootstrap-3.3.5-libs\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\MarcellusSC-Regular.ttf" />
     <Content Include="fonts\SFDigitalReadout-Heavy.ttf" />
+    <Content Include="libs\d3-libs\sankeygreenhouse.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -140,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="view\index.html" />
+    <Content Include="view\test.html" />
+    <Content Include="view\test.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,32 @@
+﻿{
+  "links": [
+    {
+      "source": "Energy",
+      "target": "Methane",
+      "value": "0.1"
+    },
+    {
+      "source": "Methane",
+      "target": "Nitrous Oxide",
+      "value": "0.2"
+    },
+    {
+      "source": "Chemicals",
+      "target": "Nitrous Oxide",
+      "value": "0.3"
+    },
+    {
+      "source": "Chemicals",
+      "target": "Energy",
+      "value": "0.1"
+    }
+  ],
+
+
+"nodes": [
+{"name":"Energy"},
+{"name":"Chemicals"},
+{"name":"Methane"},
+  { "name": "Nitrous Oxide" },
+  { "name": "Heat"}
+] }
